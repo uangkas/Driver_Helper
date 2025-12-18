@@ -3,34 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title> Data Uang Kas Driver Helper Delta 8</title>
+    <title>Data Uang Kas Driver Helper Delta 8</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body { background-color: #f8f9fa; padding: 10px; font-family: sans-serif; -webkit-tap-highlight-color: transparent; }
-        .judul-utama { color: #0d6efd; font-weight: bold; text-transform: uppercase; text-align: center; margin-bottom: 0; }
-        .sub-judul { color: #6c757d; font-size: 0.9rem; text-align: center; margin-bottom: 5px; }
-        #sync-status { display: block; width: fit-content; margin: 0 auto 10px auto; font-size: 0.75rem; cursor: pointer; }
-        .table-dark-header thead th { background-color: #343a40 !important; color: white !important; text-align: center; font-size: 0.75rem; border: 1px solid #454d55; vertical-align: middle; }
-        .name-col { position: sticky; left: 0; z-index: 10; background-color: #f0f8ff !important; width: 140px; min-width: 140px; font-weight: bold; border-right: 2px solid #dee2e6 !important; }
-        .col-aksi { width: 40px; text-align: center; cursor: pointer; font-weight: bold; color: #0d6efd; background: #fff !important; }
-        .col-rincian { background-color: #e9ecef !important; font-weight: bold; width: 80px; font-size: 0.75rem !important; text-align: center; }
-        .status-ok { background-color: #d4edda !important; text-align: center; cursor: pointer; font-size: 1.1rem; width: 45px; }
-        .status-no { background-color: #f8d7da !important; text-align: center; cursor: pointer; font-size: 1.1rem; width: 45px; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding-bottom: 8px; border-bottom: 2px solid #dee2e6; }
-        .section-header h5 { margin: 0; font-weight: bold; color: #495057; font-style: italic; }
-        .banner-rincian { background-color: #343a40; color: white; text-align: center; font-weight: bold; padding: 12px; border-radius: 5px; margin: 25px 0 10px 0; }
-        .box-saldo { color: white; padding: 10px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 0.8rem; height: 100%; }
-        .table-responsive { overflow-x: auto; border-radius: 5px; border: 1px solid #dee2e6; margin-bottom: 20px; }
-        .log-container { background: white; border-radius: 8px; border: 1px solid #dee2e6; padding: 10px; max-height: 180px; overflow-y: auto; font-size: 0.75rem; }
-        .log-item { border-bottom: 1px solid #eee; padding: 6px 0; display: flex; justify-content: space-between; align-items: flex-start; }
-        .log-time { color: #6c757d; min-width: 110px; }
-        #modalVerifyPIN .modal-content { border: none; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); }
-        #modalVerifyPIN .modal-header { background: #0d6efd; color: white; border-radius: 20px 20px 0 0; padding: 15px; justify-content: center; }
-        .pin-input { font-size: 2.2rem !important; text-align: center; letter-spacing: 15px; font-weight: bold; border: 2px solid #dee2e6; border-radius: 15px; transition: all 0.3s ease; background: #f8f9fa; color: #0d6efd; padding: 10px 0; }
+        .judul-utama { color: #0d6efd; font-weight: bold; text-transform: uppercase; text-align: center; margin-bottom: 0; font-size: 1.1rem; }
+        .sub-judul { color: #6c757d; font-size: 0.75rem; text-align: center; margin-bottom: 5px; }
+        #sync-status { display: block; width: fit-content; margin: 0 auto 10px auto; font-size: 0.65rem; cursor: pointer; }
+        
+        /* PAKSA 1 BARIS DAN STICKY */
+        .table { width: auto; min-width: 100%; white-space: nowrap; }
+        .table th, .table td { vertical-align: middle; padding: 6px 4px !important; font-size: 0.75rem; overflow: hidden; text-overflow: ellipsis; }
+        
+        .no-col { position: sticky; left: 0; z-index: 11; background-color: #343a40 !important; color: white !important; width: 35px; min-width: 35px; text-align: center; border-right: 1px solid #454d55 !important; }
+        .name-col { position: sticky; left: 35px; z-index: 10; background-color: #f0f8ff !important; width: 120px; min-width: 120px; font-weight: bold; border-right: 2px solid #dee2e6 !important; }
+        td.no-col { background-color: #e9ecef !important; color: #333 !important; }
+
+        .table-dark-header thead th { background-color: #343a40 !important; color: white !important; text-align: center; border: 1px solid #454d55; }
+        .col-aksi { width: 35px; text-align: center; cursor: pointer; color: #0d6efd; background: #fff !important; font-weight: bold; }
+        .col-rincian { background-color: #e9ecef !important; font-weight: bold; width: 60px; text-align: center; }
+        .status-ok { background-color: #d4edda !important; text-align: center; cursor: pointer; width: 40px; font-size: 1rem; }
+        .status-no { background-color: #f8d7da !important; text-align: center; cursor: pointer; width: 40px; font-size: 1rem; }
+        
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-bottom: 5px; border-bottom: 2px solid #dee2e6; }
+        .section-header h5 { margin: 0; font-weight: bold; font-size: 0.9rem; color: #495057; }
+        .banner-rincian { background-color: #343a40; color: white; text-align: center; font-weight: bold; padding: 10px; border-radius: 5px; margin: 20px 0 10px 0; font-size: 0.85rem; }
+        .box-saldo { color: white; padding: 8px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 0.7rem; height: 100%; }
+        .table-responsive { overflow-x: auto; border-radius: 5px; border: 1px solid #dee2e6; }
+        
+        .log-container { background: white; border-radius: 8px; border: 1px solid #dee2e6; padding: 8px; max-height: 150px; overflow-y: auto; font-size: 0.7rem; }
+        .log-item { border-bottom: 1px solid #eee; padding: 4px 0; display: flex; justify-content: space-between; }
+        .pin-input { font-size: 2rem !important; text-align: center; letter-spacing: 10px; font-weight: bold; border-radius: 12px; background: #f8f9fa; color: #0d6efd; }
         .exporting .admin-col, .exporting .btn-download-area, .exporting #sync-status, .exporting #log-section { display: none !important; }
-        #pdf-header-extra { display: none; }
-        .exporting #pdf-header-extra { display: block; text-align: center; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -45,14 +50,14 @@
     <div class="section-header" style="border-bottom-color: #ffc107;">
         <h5>DATA DRIVER</h5>
         <div class="d-flex admin-col">
-            <button class="btn btn-warning btn-sm fw-bold me-2 shadow-sm" onclick="askPIN('catat')">➕ Catat</button>
-            <button class="btn btn-success btn-sm fw-bold shadow-sm" onclick="askPIN('tambah')">👤 Tambah</button>
+            <button class="btn btn-warning btn-sm fw-bold me-1 shadow-sm" style="font-size: 0.7rem;" onclick="askPIN('catat')">➕ Catat</button>
+            <button class="btn btn-success btn-sm fw-bold shadow-sm" style="font-size: 0.7rem;" onclick="askPIN('tambah')">👤 Tambah</button>
         </div>
     </div>
     <div class="table-responsive">
         <table class="table table-bordered table-dark-header m-0">
             <thead>
-                <tr><th class="name-col">NAMA</th><th>JAN</th><th>FEB</th><th>MAR</th><th>APR</th><th>MEI</th><th>JUN</th><th>JUL</th><th>AGU</th><th>SEP</th><th>OKT</th><th>NOV</th><th>DES</th><th class="col-rincian">TOTAL</th><th class="admin-col">...</th></tr>
+                <tr><th class="no-col">NO</th><th class="name-col">NAMA</th><th>JAN</th><th>FEB</th><th>MAR</th><th>APR</th><th>MEI</th><th>JUN</th><th>JUL</th><th>AGU</th><th>SEP</th><th>OKT</th><th>NOV</th><th>DES</th><th class="col-rincian">TOT</th><th class="admin-col">...</th></tr>
             </thead>
             <tbody id="grid-driver"></tbody>
         </table>
@@ -62,7 +67,7 @@
     <div class="table-responsive">
         <table class="table table-bordered table-dark-header m-0">
             <thead>
-                <tr><th class="name-col">NAMA</th><th>JAN</th><th>FEB</th><th>MAR</th><th>APR</th><th>MEI</th><th>JUN</th><th>JUL</th><th>AGU</th><th>SEP</th><th>OKT</th><th>NOV</th><th>DES</th><th class="col-rincian">TOTAL</th><th class="admin-col">...</th></tr>
+                <tr><th class="no-col">NO</th><th class="name-col">NAMA</th><th>JAN</th><th>FEB</th><th>MAR</th><th>APR</th><th>MEI</th><th>JUN</th><th>JUL</th><th>AGU</th><th>SEP</th><th>OKT</th><th>NOV</th><th>DES</th><th class="col-rincian">TOT</th><th class="admin-col">...</th></tr>
             </thead>
             <tbody id="grid-helper"></tbody>
         </table>
@@ -71,134 +76,122 @@
 
 <div id="financial-report-section" class="container-fluid">
     <div class="banner-rincian">RINCIAN UANG KAS DRIVER HELPER DELTA 8</div>
-    <div id="pdf-header-extra"><h4 style="margin:0">LAPORAN UANG KAS DRIVER HELPER DELTA 8</h4><p id="pdf-date-info" style="font-weight: bold; color: #555;"></p></div>
-    <div class="btn-download-area mb-3 text-center">
-        <button class="btn btn-danger btn-sm w-100 fw-bold shadow-sm py-2" onclick="downloadPDF()">📥 DOWNLOAD RINCIAN UANG KAS</button>
+    <div class="btn-download-area mb-3"><button class="btn btn-danger btn-sm w-100 fw-bold py-2" onclick="downloadPDF()">📥 DOWNLOAD LAPORAN RINCIAN</button></div>
+    <div class="row g-2 mb-3 admin-col text-center">
+        <div class="col-6"><select class="form-select form-select-sm shadow-sm" id="selMonth" onchange="render()"></select></div>
+        <div class="col-6"><select class="form-select form-select-sm shadow-sm" id="selYear" onchange="render()"></select></div>
     </div>
-    <div class="row g-2 mb-3 admin-col">
-        <div class="col-6"><label class="small fw-bold">Bulan:</label><select class="form-select shadow-sm" id="selMonth" onchange="render()"></select></div>
-        <div class="col-6"><label class="small fw-bold">Tahun:</label><select class="form-select shadow-sm" id="selYear" onchange="render()"></select></div>
+    <div class="row g-1 mb-4">
+        <div class="col-6"><div class="box-saldo bg-secondary">SALDO AWAL: <span id="s-awal">0</span></div></div>
+        <div class="col-6"><div class="box-saldo bg-info text-dark"> SALDO AKHIR: <span id="s-akhir">0</span></div></div>
+        <div class="col-4"><div class="box-saldo bg-success">PEMASUKAN: <span id="in">0</span></div></div>
+        <div class="col-4"><div class="box-saldo bg-danger">PENGELUARAN: <span id="out">0</span></div></div>
+        <div class="col-4"><div class="box-saldo bg-primary">TOTAL SALDO: <span id="bal">0</span></div></div>
     </div>
-    <div class="row g-2 mb-4">
-        <div class="col-6"><div class="box-saldo bg-secondary">SALDO AWAL<br><span id="s-awal">Rp 0</span></div></div>
-        <div class="col-6"><div class="box-saldo bg-info text-dark">SALDO AKHIR<br><span id="s-akhir">Rp 0</span></div></div>
-        <div class="col-4"><div class="box-saldo bg-success">MASUK<br><span id="in">Rp 0</span></div></div>
-        <div class="col-4"><div class="box-saldo bg-danger">KELUAR<br><span id="out">Rp 0</span></div></div>
-        <div class="col-4"><div class="box-saldo bg-primary">TOTAL KAS<br><span id="bal">Rp 0</span></div></div>
-    </div>
-    <h5 class="text-center fw-bold mb-3" style="color:#6c757d">RIWAYAT TRANSAKSI</h5>
-    <div class="table-responsive shadow-sm mb-4">
-        <table class="table table-bordered table-striped m-0 text-center small">
-            <thead class="table-primary"><tr><th>TANGGAL</th><th>TIPE</th><th>PENERIMA/SUMBER</th><th>KETERANGAN</th><th>NOMINAL</th><th class="admin-col">...</th></tr></thead>
+    <div class="table-responsive shadow-sm">
+        <table class="table table-bordered table-striped m-0 text-center">
+            <thead class="table-primary"><tr><th>TANGGAL</th><th>TIPE</th><th>SUMBER/PENERIMA</th><th>KETERANGAN</th><th>NOMINAL</th><th class="admin-col">...</th></tr></thead>
             <tbody id="hist"></tbody>
         </table>
     </div>
 </div>
 
-<div id="log-section" class="container-fluid mb-5">
-    <h6 class="fw-bold text-muted">🕒 LOG AKTIVITAS</h6>
-    <div class="log-container shadow-sm" id="log-list"></div>
-</div>
+<div id="log-section" class="container-fluid mb-5 mt-4"><h6 class="fw-bold text-muted small">🕒 LOG AKTIVITAS</h6><div class="log-container shadow-sm" id="log-list"></div></div>
 
-<div class="modal fade" id="modalVerifyPIN" tabindex="-1" data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-        <div class="modal-content">
-            <div class="modal-header border-0 pb-0 text-center w-100"><b class="w-100 text-white">🔒 VERIFIKASI AKSES</b></div>
-            <div class="modal-body text-center">
-                <p class="text-muted small mb-3">Masukkan 4 Digit PIN Keamanan</p>
-                <input type="password" id="inputPIN" class="form-control pin-input mb-2" inputmode="numeric" maxlength="4" oninput="handlePinInput(this)" placeholder="••••">
-            </div>
-            <div class="modal-footer border-0 pt-0 d-flex justify-content-center">
-                <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
-                <button class="btn btn-primary btn-sm px-4" onclick="checkPIN()">Lanjut</button>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="modal fade" id="modalVerifyPIN" tabindex="-1" data-bs-backdrop="static"><div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content"><div class="modal-body p-4 text-center"><p class="fw-bold small mb-3">PIN AKSES</p><input type="password" id="inputPIN" class="form-control pin-input mb-3" inputmode="numeric" maxlength="4" oninput="if(this.value.length==4)checkPIN()"><div class="d-flex justify-content-center gap-2"><button class="btn btn-light btn-sm" data-bs-dismiss="modal">Batal</button><button class="btn btn-primary btn-sm px-4" onclick="checkPIN()">OK</button></div></div></div></div></div>
 
-<div class="modal fade" id="modalMenu" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content"><div class="modal-body p-0"><div class="list-group list-group-flush text-center"><div class="list-group-item fw-bold text-muted bg-light" id="menuLabel"></div><button class="list-group-item list-group-item-action py-3 text-primary fw-bold" onclick="askPIN('edit')">✏️ EDIT DATA</button><button class="list-group-item list-group-item-action py-3 text-danger fw-bold" onclick="askPIN('hapus')">🗑️ HAPUS DATA</button><button class="list-group-item list-group-item-action py-3" data-bs-dismiss="modal">Batal</button></div></div></div></div></div>
-<div class="modal fade" id="modalTambah" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><form id="fAdd"><div class="modal-header"><b>Tambah Anggota</b></div><div class="modal-body"><input type="text" id="n" class="form-control mb-2" placeholder="Nama" required><select id="k" class="form-select"><option value="Driver">Driver</option><option value="Helper">Helper</option></select></div><div class="modal-footer"><button type="submit" class="btn btn-primary w-100">SIMPAN</button></div></form></div></div></div>
-<div class="modal fade" id="modalCatat" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><form id="fTrans"><div class="modal-header"><b>Catat Transaksi</b></div><div class="modal-body"><select name="tp" class="form-select mb-2"><option value="Pemasukan">Pemasukan</option><option value="Pengeluaran">Pengeluaran</option></select><input type="date" name="d" class="form-control mb-2" required><input type="text" name="p" class="form-control mb-2" placeholder="Penerima / Sumber" required><input type="text" name="k" class="form-control mb-2" placeholder="Keterangan" required><input type="number" name="v" class="form-control" required></div><div class="modal-footer"><button type="submit" class="btn btn-warning w-100">SIMPAN</button></div></form></div></div></div>
-<div class="modal fade" id="modalEditTrans" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><b>Edit Transaksi</b></div><div class="modal-body"><select id="etTp" class="form-select mb-2"><option value="Pemasukan">Pemasukan</option><option value="Pengeluaran">Pengeluaran</option></select><input type="date" id="etD" class="form-control mb-2"><input type="text" id="etP" class="form-control mb-2" placeholder="Penerima / Sumber"><input type="text" id="etK" class="form-control mb-2" placeholder="Keterangan"><input type="number" id="etV" class="form-control"></div><div class="modal-footer"><button class="btn btn-warning w-100" onclick="saveEditTrans()">UPDATE</button></div></div></div></div>
-<div class="modal fade" id="modalEditAnggota" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><b>Edit Anggota</b></div><div class="modal-body"><label class="small fw-bold">Nama:</label><input type="text" id="eName" class="form-control mb-2"><label class="small fw-bold">Kategori:</label><select id="eKat" class="form-select"><option value="Driver">Driver</option><option value="Helper">Helper</option></select></div><div class="modal-footer"><button class="btn btn-primary w-100" onclick="saveEditAnggota()">SIMPAN</button></div></div></div></div>
+<div class="modal fade" id="modalMenu" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content"><div class="modal-body p-0 text-center"><div class="list-group list-group-flush"><div class="list-group-item small fw-bold bg-light" id="menuLabel"></div><button class="list-group-item list-group-item-action py-3 text-primary fw-bold" onclick="askPIN('edit')">✏️ EDIT</button><button class="list-group-item list-group-item-action py-3 text-danger fw-bold" onclick="askPIN('hapus')">🗑️ HAPUS</button><button class="list-group-item list-group-item-action py-2 small" data-bs-dismiss="modal">Tutup</button></div></div></div></div></div>
+
+<div class="modal fade" id="modalTambah" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><form id="fAdd"><div class="modal-header"><b>Tambah Anggota</b></div><div class="modal-body"><input type="text" id="n" class="form-control mb-2" placeholder="Nama" required><select id="k" class="form-select"><option value="Driver">Driver</option><option value="Helper">Helper</option></select></div><div class="modal-footer"><button type="submit" class="btn btn-primary w-100">SIMPAN</button></div></form></div></div></div>
+<div class="modal fade" id="modalCatat" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><form id="fTrans"><div class="modal-header"><b>Catat Transaksi</b></div><div class="modal-body"><select name="tp" class="form-select mb-2"><option value="Pemasukan">Pemasukan</option><option value="Pengeluaran">Pengeluaran</option></select><input type="date" name="d" class="form-control mb-2" required><input type="text" name="p" class="form-control mb-2" placeholder="Sumber/Penerima" required><input type="text" name="k" class="form-control mb-2" placeholder="Keterangan" required><input type="number" name="v" class="form-control" placeholder="Nominal" required></div><div class="modal-footer"><button type="submit" class="btn btn-warning w-100">SIMPAN</button></div></form></div></div></div>
+<div class="modal fade" id="modalEditTrans" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><b>Edit Transaksi</b></div><div class="modal-body"><select id="etTp" class="form-select mb-2"><option value="Pemasukan">Pemasukan</option><option value="Pengeluaran">Pengeluaran</option></select><input type="date" id="etD" class="form-control mb-2"><input type="text" id="etP" class="form-control mb-2"><input type="text" id="etK" class="form-control mb-2"><input type="number" id="etV" class="form-control"></div><div class="modal-footer"><button class="btn btn-warning w-100" onclick="saveEditTrans()">UPDATE</button></div></div></div></div>
+<div class="modal fade" id="modalEditAnggota" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><b>Edit Anggota</b></div><div class="modal-body"><input type="text" id="eName" class="form-control mb-2"><select id="eKat" class="form-select"><option value="Driver">Driver</option><option value="Helper">Helper</option></select></div><div class="modal-footer"><button class="btn btn-primary w-100" onclick="saveEditAnggota()">SIMPAN</button></div></div></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // MASUKKAN URL WEB APP ANDA DI SINI
     const CLOUD_URL = 'https://script.google.com/macros/s/AKfycbzureBi1LFx9zLcC93-FfqhGk7wzPNttTyzCs_lsqf5WZx0YD75X7xlj5EAL7M8T75itQ/exec'; 
     const APP_PIN = "0000"; 
-    
     let DB_DRIVER = [], DB_HELPER = [], DB_TRANSAKSI = [], DB_LOGS = [], nextId = 1;
     let currentSelection = null, pendingAction = null, pendingParams = null;
 
-    function askPIN(actionType, params = null) {
-        pendingAction = actionType; pendingParams = params;
-        document.getElementById('inputPIN').value = "";
-        bootstrap.Modal.getOrCreateInstance(document.getElementById('modalVerifyPIN')).show();
-        setTimeout(() => document.getElementById('inputPIN').focus(), 500);
-    }
-    function handlePinInput(el) { if (el.value.length === 4) checkPIN(); }
-    function checkPIN() {
-        const inputEl = document.getElementById('inputPIN');
-        if (inputEl.value === APP_PIN) {
-            bootstrap.Modal.getInstance(document.getElementById('modalVerifyPIN')).hide();
-            executePendingAction();
-        } else if (inputEl.value.length === 4) {
-            alert("⚠️ PIN SALAH!"); inputEl.value = ""; inputEl.focus();
-        }
-    }
-    function executePendingAction() {
-        if (pendingAction === 'tambah') new bootstrap.Modal(document.getElementById('modalTambah')).show();
-        if (pendingAction === 'catat') new bootstrap.Modal(document.getElementById('modalCatat')).show();
-        if (pendingAction === 'edit') handleEdit();
-        if (pendingAction === 'hapus') handleHapus();
-        if (pendingAction === 'toggle') processToggle(pendingParams.id, pendingParams.kat, pendingParams.y, pendingParams.m);
-        pendingAction = null; pendingParams = null;
+    // FIX FUNGSI ASK PIN: Tutup modal menu dengan benar sebelum buka PIN
+    function askPIN(type, params = null) { 
+        pendingAction = type; 
+        pendingParams = params; 
+
+        // Tutup modal menu jika ada instance yang sedang aktif
+        const menuModalEl = document.getElementById('modalMenu');
+        const menuModalInstance = bootstrap.Modal.getInstance(menuModalEl);
+        if (menuModalInstance) menuModalInstance.hide();
+
+        // Reset input PIN
+        document.getElementById('inputPIN').value = ""; 
+        
+        // Berikan jeda transisi 200ms agar backdrop tidak macet
+        setTimeout(() => {
+            const pinModal = new bootstrap.Modal(document.getElementById('modalVerifyPIN'));
+            pinModal.show();
+        }, 200);
     }
 
+    function checkPIN() {
+        if (document.getElementById('inputPIN').value === APP_PIN) {
+            const pinModalEl = document.getElementById('modalVerifyPIN');
+            bootstrap.Modal.getInstance(pinModalEl).hide();
+            
+            // Jalankan aksi setelah modal PIN tertutup sepenuhnya
+            setTimeout(() => {
+                if (pendingAction === 'tambah') new bootstrap.Modal(document.getElementById('modalTambah')).show();
+                else if (pendingAction === 'catat') new bootstrap.Modal(document.getElementById('modalCatat')).show();
+                else if (pendingAction === 'edit') handleEdit();
+                else if (pendingAction === 'hapus') handleHapus();
+                else if (pendingAction === 'toggle') processToggle(pendingParams.id, pendingParams.kat, pendingParams.y, pendingParams.m);
+                pendingAction = null;
+            }, 300);
+        } else {
+            alert("PIN SALAH!");
+            document.getElementById('inputPIN').value = "";
+        }
+    }
+
+    function handleEdit() {
+        if(currentSelection.tipe === 'Transaksi') {
+            let t = DB_TRANSAKSI[currentSelection.id];
+            document.getElementById('etTp').value = t.tp; 
+            document.getElementById('etD').value = t.d; 
+            document.getElementById('etP').value = t.p; 
+            document.getElementById('etK').value = t.k; 
+            document.getElementById('etV').value = t.v;
+            new bootstrap.Modal(document.getElementById('modalEditTrans')).show();
+        } else {
+            let p = (currentSelection.tipe === 'Driver' ? DB_DRIVER : DB_HELPER).find(x => x.id === currentSelection.id);
+            document.getElementById('eName').value = p.nama; 
+            document.getElementById('eKat').value = currentSelection.tipe;
+            new bootstrap.Modal(document.getElementById('modalEditAnggota')).show();
+        }
+    }
+
+    // FUNGSI LAINNYA TETAP SAMA
     function addLog(msg) {
-        const now = new Date();
-        const timeStr = now.toLocaleDateString('id-ID') + " " + now.toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'});
-        DB_LOGS.unshift({ time: timeStr, msg: msg });
-        if(DB_LOGS.length > 1000) DB_LOGS.pop();
+        const timeStr = new Date().toLocaleString('id-ID', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+        DB_LOGS.unshift({ time: timeStr, msg }); if(DB_LOGS.length > 300) DB_LOGS.pop();
     }
 
     async function loadFromCloud() {
-        const st = document.getElementById('sync-status');
-        st.innerText = "☁️ Menghubungkan...";
+        const st = document.getElementById('sync-status'); st.innerText = "☁️ Memuat...";
         try {
             const res = await fetch(CLOUD_URL + "?action=read");
             const data = await res.json();
-            if(data) {
-                DB_DRIVER = data.driver || []; DB_HELPER = data.helper || [];
-                DB_TRANSAKSI = data.transaksi || []; DB_LOGS = data.logs || [];
-                nextId = Math.max(...[...DB_DRIVER, ...DB_HELPER].map(x=>x.id), 0) + 1;
-                saveLocal(); render();
-                st.innerText = "☁️ Status: ✅ Data Terkini";
-            }
-        } catch (e) { st.innerText = "☁️ Status: ❌ Mode Offline"; }
+            DB_DRIVER = data.driver || []; DB_HELPER = data.helper || [];
+            DB_TRANSAKSI = data.transaksi || []; DB_LOGS = data.logs || [];
+            nextId = Math.max(...[...DB_DRIVER, ...DB_HELPER].map(x=>x.id), 0) + 1;
+            render(); st.innerText = "☁️ Terkoneksi";
+        } catch (e) { st.innerText = "☁️ Offline"; }
     }
 
     async function syncAll() {
-        saveLocal();
-        const st = document.getElementById('sync-status');
-        st.innerText = "☁️ Menyinkronkan...";
-        try {
-            const payload = { driver: DB_DRIVER, helper: DB_HELPER, transaksi: DB_TRANSAKSI, logs: DB_LOGS };
-            // PERBAIKAN: Hapus mode: 'no-cors' agar respon terbaca
-            const response = await fetch(CLOUD_URL, { 
-                method: 'POST', 
-                body: JSON.stringify(payload) 
-            });
-            st.innerText = "☁️ Status: ✅ Sinkron";
-        } catch (e) { 
-            console.error(e);
-            st.innerText = "☁️ Status: ❌ Gagal Sinkron"; 
-        }
-    }
-
-    function saveLocal() {
         localStorage.setItem('D8_DB_FINAL', JSON.stringify({driver:DB_DRIVER, helper:DB_HELPER, transaksi:DB_TRANSAKSI, logs:DB_LOGS, nextId}));
+        try { await fetch(CLOUD_URL, { method: 'POST', body: JSON.stringify({ driver: DB_DRIVER, helper: DB_HELPER, transaksi: DB_TRANSAKSI, logs: DB_LOGS }) }); } catch (e) {}
     }
 
     function render() {
@@ -208,8 +201,9 @@
         let sAwal = calculatePastBalance(m, y), cIn = 0, cOut = 0;
 
         const draw = (list, target, kat) => {
-            list.forEach(p => {
-                let lunasCount = 0, row = `<td class="name-col">${p.nama}</td>`;
+            list.forEach((p, idx) => {
+                let lunasCount = 0;
+                let row = `<td class="no-col">${idx + 1}</td><td class="name-col">${p.nama}</td>`;
                 for(let i=1; i<=12; i++) {
                     let s = p.status?.[y]?.[i] || false;
                     if(s) { lunasCount++; if(i === m) cIn += 25000; }
@@ -224,19 +218,16 @@
         DB_TRANSAKSI.filter(x => { let d = new Date(x.d); return d.getFullYear() === y && (d.getMonth() + 1) === m;
         }).forEach((x, idx) => {
             if(x.tp === 'Pemasukan') cIn += x.v; else cOut += x.v;
-            hi.innerHTML += `<tr><td>${x.d}</td><td>${x.tp}</td><td>${x.p}</td><td>${x.k}</td><td>Rp ${x.v.toLocaleString()}</td><td class="col-aksi admin-col" onclick="askAction(${idx},'Transaksi','${x.k}')">⋮</td></tr>`;
+            hi.innerHTML += `<tr><td>${x.d.split('-').reverse().join('/')}</td><td>${x.tp}</td><td>${x.p}</td><td>${x.k}</td><td>${x.v.toLocaleString()}</td><td class="col-aksi admin-col" onclick="askAction(${idx},'Transaksi','${x.k}')">⋮</td></tr>`;
         });
 
-        const selM = m.toString().padStart(2, '0'), selY = y.toString();
-        const filteredLogs = DB_LOGS.filter(l => l.time.includes(`/${selM}/${selY}`));
-        filteredLogs.forEach(l => lg.innerHTML += `<div class="log-item"><span class="log-time">${l.time}</span><span class="log-msg">${l.msg}</span></div>`);
-        if(!filteredLogs.length) lg.innerHTML = '<div class="text-center text-muted py-3 small">Tidak ada aktivitas bulan ini.</div>';
+        DB_LOGS.filter(l => l.time.includes(`/${m.toString().padStart(2,'0')}/${y}`)).forEach(l => lg.innerHTML += `<div class="log-item"><span>${l.time}</span><span>${l.msg}</span></div>`);
 
-        document.getElementById('s-awal').innerText = "Rp " + sAwal.toLocaleString('id-ID');
-        document.getElementById('in').innerText = "Rp " + cIn.toLocaleString('id-ID');
-        document.getElementById('out').innerText = "Rp " + cOut.toLocaleString('id-ID');
-        document.getElementById('bal').innerText = "Rp " + (sAwal + cIn - cOut).toLocaleString('id-ID');
-        document.getElementById('s-akhir').innerText = "Rp " + (sAwal + cIn - cOut).toLocaleString('id-ID');
+        document.getElementById('s-awal').innerText = sAwal.toLocaleString('id-ID');
+        document.getElementById('in').innerText = cIn.toLocaleString('id-ID');
+        document.getElementById('out').innerText = cOut.toLocaleString('id-ID');
+        document.getElementById('bal').innerText = (sAwal + cIn - cOut).toLocaleString('id-ID');
+        document.getElementById('s-akhir').innerText = (sAwal + cIn - cOut).toLocaleString('id-ID');
     }
 
     function calculatePastBalance(m, y) {
@@ -249,81 +240,64 @@
     function processToggle(id, kat, y, m) {
         let p = (kat === 'Driver' ? DB_DRIVER : DB_HELPER).find(x => x.id === id);
         if(!p.status) p.status = {}; if(!p.status[y]) p.status[y] = {};
-        p.status[y][m] = !p.status[y][m];
-        addLog(`Iuran ${p.nama} (${m}/${y}) -> ${p.status[y][m]?'Lunas':'❌'}`);
-        syncAll(); render();
+        p.status[y][m] = !p.status[y][m]; addLog(`${p.nama} ${m}/${y}: ${p.status[y][m]?'Lunas':'Hapus'}`); syncAll(); render();
     }
 
     document.getElementById('fAdd').onsubmit = (e) => {
         e.preventDefault();
         let p = { id: nextId++, nama: document.getElementById('n').value, status: {} };
         if(document.getElementById('k').value === 'Driver') DB_DRIVER.push(p); else DB_HELPER.push(p);
-        addLog(`➕ Anggota: ${p.nama}`); syncAll(); render(); e.target.reset(); bootstrap.Modal.getInstance(document.getElementById('modalTambah')).hide();
+        addLog(`➕ Anggota: ${p.nama}`); syncAll(); render(); bootstrap.Modal.getInstance(document.getElementById('modalTambah')).hide();
     };
 
     document.getElementById('fTrans').onsubmit = (e) => {
-        e.preventDefault();
-        const f = new FormData(e.target);
-        const tp = f.get('tp'), p = f.get('p'), k = f.get('k'), v = parseInt(f.get('v'));
-        DB_TRANSAKSI.push({ tp, d: f.get('d'), p, k, v });
-        addLog(`💰 [${tp}] Penerima/Sumber: ${p} | Ket: ${k} (Rp ${v.toLocaleString()})`); 
-        syncAll(); render(); e.target.reset(); bootstrap.Modal.getInstance(document.getElementById('modalCatat')).hide();
+        e.preventDefault(); const f = new FormData(e.target);
+        DB_TRANSAKSI.push({ tp: f.get('tp'), d: f.get('d'), p: f.get('p'), k: f.get('k'), v: parseInt(f.get('v')) });
+        addLog(`💰 ${f.get('tp')}: ${f.get('k')}`); syncAll(); render(); bootstrap.Modal.getInstance(document.getElementById('modalCatat')).hide();
     };
 
-    function askAction(id, tipe, label) { currentSelection = { id, tipe, label }; document.getElementById('menuLabel').innerText = label; new bootstrap.Modal(document.getElementById('modalMenu')).show(); }
-
-    function handleEdit() {
-        bootstrap.Modal.getInstance(document.getElementById('modalMenu')).hide();
-        if(currentSelection.tipe === 'Transaksi') {
-            let t = DB_TRANSAKSI[currentSelection.id];
-            document.getElementById('etTp').value = t.tp; document.getElementById('etD').value = t.d; document.getElementById('etP').value = t.p; document.getElementById('etK').value = t.k; document.getElementById('etV').value = t.v;
-            new bootstrap.Modal(document.getElementById('modalEditTrans')).show();
-        } else {
-            let p = (currentSelection.tipe === 'Driver' ? DB_DRIVER : DB_HELPER).find(x => x.id === currentSelection.id);
-            document.getElementById('eName').value = p.nama; document.getElementById('eKat').value = currentSelection.tipe;
-            new bootstrap.Modal(document.getElementById('modalEditAnggota')).show();
-        }
+    function askAction(id, tipe, label) { 
+        currentSelection = { id, tipe, label }; 
+        document.getElementById('menuLabel').innerText = label; 
+        const m = new bootstrap.Modal(document.getElementById('modalMenu'));
+        m.show(); 
     }
 
     function saveEditAnggota() {
         let nKat = document.getElementById('eKat').value, oldList = currentSelection.tipe === 'Driver' ? DB_DRIVER : DB_HELPER;
-        let idx = oldList.findIndex(x => x.id === currentSelection.id);
-        addLog(`✏️ Edit Anggota: ${oldList[idx].nama}`);
-        oldList[idx].nama = document.getElementById('eName').value;
-        if(nKat !== currentSelection.tipe) { let data = oldList.splice(idx, 1)[0]; if(nKat === 'Driver') DB_DRIVER.push(data); else DB_HELPER.push(data); }
-        syncAll(); render(); bootstrap.Modal.getInstance(document.getElementById('modalEditAnggota')).hide();
+        let p = oldList.find(x => x.id === currentSelection.id); p.nama = document.getElementById('eName').value;
+        if(nKat !== currentSelection.tipe) {
+            let idx = oldList.findIndex(x => x.id === currentSelection.id);
+            let data = oldList.splice(idx, 1)[0]; if(nKat === 'Driver') DB_DRIVER.push(data); else DB_HELPER.push(data);
+        }
+        addLog(`✏️ Edit: ${p.nama}`); syncAll(); render(); bootstrap.Modal.getInstance(document.getElementById('modalEditAnggota')).hide();
     }
 
     function saveEditTrans() {
         let t = DB_TRANSAKSI[currentSelection.id];
-        addLog(`✏️ Edit Trans: [${document.getElementById('etTp').value}] Penerima/Sumber: ${document.getElementById('etP').value} | Ket: ${document.getElementById('etK').value}`);
         t.tp = document.getElementById('etTp').value; t.d = document.getElementById('etD').value; t.p = document.getElementById('etP').value; t.k = document.getElementById('etK').value; t.v = parseInt(document.getElementById('etV').value);
-        syncAll(); render(); bootstrap.Modal.getInstance(document.getElementById('modalEditTrans')).hide();
+        addLog(`✏️ Edit Trans: ${t.k}`); syncAll(); render(); bootstrap.Modal.getInstance(document.getElementById('modalEditTrans')).hide();
     }
 
     function handleHapus() {
-        addLog(`🗑️ Hapus: ${currentSelection.label}`);
         if(currentSelection.tipe === 'Transaksi') DB_TRANSAKSI.splice(currentSelection.id, 1);
         else if(currentSelection.tipe === 'Driver') DB_DRIVER = DB_DRIVER.filter(x => x.id !== currentSelection.id);
         else DB_HELPER = DB_HELPER.filter(x => x.id !== currentSelection.id);
-        syncAll(); render(); bootstrap.Modal.getInstance(document.getElementById('modalMenu')).hide();
+        addLog(`🗑️ Hapus: ${currentSelection.label}`); syncAll(); render(); 
     }
 
     function downloadPDF() {
         const element = document.getElementById('financial-report-section');
         const bulan = document.getElementById('selMonth').options[document.getElementById('selMonth').selectedIndex].text;
-        document.getElementById('pdf-date-info').innerText = `Periode: ${bulan} ${document.getElementById('selYear').value}`;
         document.body.classList.add('exporting');
-        html2pdf().set({ margin: 10, filename: `Lap_Kas_Delta8_${bulan}.pdf`, html2canvas: { scale: 2 }, jsPDF: { format: 'a4', orientation: 'portrait' } }).from(element).save().then(() => { document.body.classList.remove('exporting'); });
+        html2pdf().set({ margin: 10, filename: `Kas_D8_${bulan}.pdf`, html2canvas: { scale: 2 }, jsPDF: { format: 'a4', orientation: 'portrait' } }).from(element).save().then(() => { document.body.classList.remove('exporting'); });
     }
 
     window.onload = () => {
         const sm = document.getElementById('selMonth'), sy = document.getElementById('selYear'), now = new Date();
-        const names = ["","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+        const names = ["","Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
         for(let i=1; i<=12; i++) sm.innerHTML += `<option value="${i}" ${i===(now.getMonth()+1)?'selected':''}>${names[i]}</option>`;
         for(let i=2024; i<=2050; i++) sy.innerHTML += `<option value="${i}" ${i===now.getFullYear()?'selected':''}>${i}</option>`;
-        let saved = JSON.parse(localStorage.getItem('D8_DB_FINAL'));
-        if(saved) { DB_DRIVER=saved.driver; DB_HELPER=saved.helper; DB_TRANSAKSI=saved.transaksi; DB_LOGS=saved.logs; nextId=saved.nextId; render(); }
         loadFromCloud();
     };
 </script>
