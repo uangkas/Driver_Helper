@@ -44,11 +44,10 @@
             border-spacing: 0; 
         }
 
-        /* STICKY HEADER GLOBAL UNTUK SEMUA TABEL */
         .table thead th { 
             position: sticky;
             top: 0;
-            z-index: 25; /* Lebih tinggi dari kolom sticky samping */
+            z-index: 25; 
             background: var(--gradient) !important; 
             color: #000000 !important;
             font-size: 0.65rem !important; 
@@ -59,7 +58,6 @@
             vertical-align: middle;
         }
 
-        /* KHUSUS HEADER TRANSAKSI & LOG (Warna disesuaikan tema agar tidak silau) */
         #table-transaksi thead th,
         #log-col table thead th {
             background: var(--bg-card) !important;
@@ -94,7 +92,6 @@
             border-right: 2px solid var(--accent-color) !important;
         }
 
-        /* Agar header no dan nama tetap di atas saat scroll vertikal dan horizontal */
         thead th.no-col { z-index: 40 !important; top: 0; left: 0; background: var(--gradient) !important; }
         thead th.name-col { z-index: 39 !important; top: 0; left: 40px; background: var(--gradient) !important; }
 
@@ -105,59 +102,69 @@
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
         }
 
-        .fleet-header-wrapper { margin-top: 30px; margin-bottom: 5px; }
-        .header-driver-container { display: flex; justify-content: flex-end; align-items: center; width: 100%; }
-        .panel-kanan { display: flex; align-items: center; gap: 10px; width: 100%; justify-content: flex-end; }
+        /* --- PERBAIKAN STRUKTUR RATA KIRI KANAN --- */
+        .fleet-header-wrapper { margin-top: 30px; margin-bottom: 10px; padding: 0; }
+        .panel-kanan { 
+            display: flex; 
+            align-items: center; 
+            width: 100%; 
+            justify-content: space-between; /* Membuat satu grup di kiri, satu di kanan */
+            gap: 10px;
+        }
+
+        .select-group-mini { 
+            display: flex; 
+            gap: 2px; 
+            background: var(--bg-card); 
+            padding: 2px 8px; 
+            border-radius: 8px; 
+            border: 1px solid var(--border-color); 
+            height: 36px; 
+            align-items: center; 
+        }
+
+        .custom-select-mini { 
+            background: transparent; 
+            color: var(--accent-color); 
+            border: none; 
+            font-size: 0.75rem; 
+            font-weight: 900; 
+            cursor: pointer; 
+            outline: none; 
+            text-transform: uppercase; 
+            padding: 0 2px;
+        }
+
+        .btn-luxe { 
+            font-size: 0.7rem !important; 
+            font-weight: 900 !important; 
+            height: 36px; 
+            padding: 0 10px !important; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: 8px !important; 
+            letter-spacing: 0.5px; 
+            white-space: nowrap; 
+        }
+
         .label-armada { font-weight: 900; color: var(--accent-color); margin: 15px 0 5px 0; display: block; width: 100%; }
 
-        /* Penyesuaian Ukuran Pilihan Bulan dan Tahun */
-.select-group-mini { 
-    display: flex; 
-    gap: 2px; /* Jarak antar select lebih rapat */
-    background: var(--bg-card); 
-    padding: 2px 8px; /* Padding dikurangi */
-    border-radius: 8px; 
-    border: 1px solid var(--border-color); 
-    height: 36px; /* Tinggi disamakan atau sedikit lebih kecil dari tombol */
-    align-items: center; 
-}
-
-.custom-select-mini { 
-    background: transparent; 
-    color: var(--accent-color); 
-    border: none; 
-    font-size: 0.75rem; /* Font diperkecil dari 0.85rem */
-    font-weight: 900; 
-    cursor: pointer; 
-    outline: none; 
-    text-transform: uppercase; 
-    padding: 0 2px;
-}
-
-        .btn-luxe { font-size: 0.75rem !important; font-weight: 900 !important; height: 40px; padding: 0 15px !important; display: flex; align-items: center; justify-content: center; border-radius: 8px !important; letter-spacing: 0.5px; white-space: nowrap; }
-
+        /* Sisanya tetap sama */
         .card-saldo { background: var(--card-inner); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 8px; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center; min-height: 80px; }
         .card-saldo .label { font-size: 0.6rem; font-weight: 900; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; line-height: 1.2; }
         .card-saldo .value { font-size: 0.85rem; font-weight: 900; color: var(--text-main); }
-
         .theme-dot { width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(128,128,128,0.3); }
         .theme-dot.active { border: 2px solid var(--text-main); transform: scale(1.1); box-shadow: 0 0 10px var(--accent-color); }
-        
         .luxe-dropdown { width: 100%; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--accent-color); padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: bold; margin-top: 15px; }
-        
-        /* Box Scroll Khusus Log & Transaksi */
         .luxe-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: var(--log-bg); border-radius: 0 0 12px 12px; }
         .luxe-content.show { max-height: 450px; border: 1px solid var(--border-color); border-top: none; }
-        
         #financial-area .table-responsive { max-height: 400px; }
         #log-col .table-responsive { max-height: 350px; border: none !important; }
-
         .banner-bar { background: var(--gradient); color: #000; padding: 10px; border-radius: 8px; font-weight: 900; text-align: center; margin: 30px 0 15px 0; font-size: 0.85rem; letter-spacing: 2px; }
         .btn-aksi-trigger { cursor: pointer; color: var(--accent-color); font-weight: bold; text-align: center; font-size: 1.2rem; width: 40px; }
-        
         .modal-content { background: var(--bg-card); border: 2px solid var(--accent-color); color: var(--text-main); border-radius: 15px; }
         .form-control, .form-select { background-color: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main); }
-        
         #actionMenu { display: none; position: absolute; z-index: 99999; background: var(--bg-card); border: 1px solid var(--accent-color); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); min-width: 110px; overflow: hidden; }
         .menu-item { padding: 10px 15px; cursor: pointer; font-size: 0.85rem; border-bottom: 1px solid var(--border-color); color: var(--text-main); }
         .menu-item:hover { background: var(--border-color); }
@@ -179,16 +186,17 @@
     </div>
 
     <div id="fleet-area">
-        <div class="fleet-header-wrapper px-1">
-            <div class="header-driver-container">
-                <div class="panel-kanan">
-                    <div class="select-group-mini">
-                        <select id="selMonth" class="custom-select-mini" onchange="render()"></select>
-                        <span style="color: var(--border-color); opacity: 0.5;">|</span>
-                        <select id="selYear" class="custom-select-mini" onchange="render()"></select>
-                    </div>
-                    <button class="btn btn-luxe btn-dark border-secondary text-warning btn-catat-mob" onclick="askAuth('catat')">+ TRANSAKSI</button>
-                    <button class="btn btn-luxe btn-dark border-secondary text-white btn-tambah-mob" onclick="askAuth('tambah')">+ ANGGOTA</button>
+        <div class="fleet-header-wrapper">
+            <div class="panel-kanan">
+                <div class="select-group-mini">
+                    <select id="selMonth" class="custom-select-mini" onchange="render()"></select>
+                    <span style="color: var(--border-color); opacity: 0.5;">|</span>
+                    <select id="selYear" class="custom-select-mini" onchange="render()"></select>
+                </div>
+                
+                <div class="d-flex gap-2">
+                    <button class="btn btn-luxe btn-dark border-secondary text-warning" onclick="askAuth('catat')">+ TRANSAKSI</button>
+                    <button class="btn btn-luxe btn-dark border-secondary text-white" onclick="askAuth('tambah')">+ ANGGOTA</button>
                 </div>
             </div>
             <h6 class="label-armada">| DATA DRIVER</h6>
@@ -287,7 +295,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Seluruh Script JavaScript tetap dipertahankan sesuai permintaan Anda tanpa perubahan logika
     const CLOUD_URL = 'https://script.google.com/macros/s/AKfycbz6z9AT8Wu4omq-Qj_IPjR5giZK8-W8d_YkubQE6qRGOD3nd4CN1bkerdgQBXEqTrRr/exec'; 
     const APP_PIN = "0000"; 
     let DB_DRIVER = [], DB_HELPER = [], DB_TRANSAKSI = [], DB_LOGS = [];
@@ -496,7 +503,6 @@
     const pageWidth = 210;
     const centerX = pageWidth / 2;
 
-    // 1. DATA ACUAN
     const mText = document.getElementById('selMonth').options[document.getElementById('selMonth').selectedIndex].text;
     const yText = document.getElementById('selYear').value;
 
@@ -506,7 +512,6 @@
     const keluar = document.getElementById('out').innerText;
     const lainnya = document.getElementById('bal').innerText;
 
-    // --- A. HEADER (EMAS & HITAM) ---
     doc.setFillColor(15, 15, 15); 
     doc.rect(0, 0, pageWidth, 50, 'F');
     doc.setDrawColor(184, 134, 11);
@@ -528,13 +533,12 @@
     doc.setTextColor(212, 175, 55);
     doc.text(`${mText.toUpperCase()} ${yText}`, centerX, 38, { align: "center" });
 
-    // --- B. KARTU SALDO (WARNA SESUAI SCREENSHOT) ---
     const cards = [
         { label: "SALDO AWAL", value: sAwal, color: [60, 60, 60] },
-        { label: "IURAN", value: iuran, color: [16, 185, 129] }, // Hijau
+        { label: "IURAN", value: iuran, color: [16, 185, 129] },
         { label: "LAINNYA", value: lainnya, color: [60, 60, 60] },
-        { label: "PENGELUARAN", value: keluar, color: [220, 53, 69] }, // Merah
-        { label: "SALDO AKHIR", value: sAkhir, color: [184, 134, 11] } // Emas
+        { label: "PENGELUARAN", value: keluar, color: [220, 53, 69] },
+        { label: "SALDO AKHIR", value: sAkhir, color: [184, 134, 11] }
     ];
 
     let startX = 12.5;
@@ -549,7 +553,6 @@
         startX += 37;
     });
 
-    // --- C. TABEL TRANSAKSI (FOKUS WARNA TEXT) ---
     const rows = [];
     document.querySelectorAll('#hist tr').forEach(tr => {
         const cols = tr.querySelectorAll('td');
@@ -566,65 +569,31 @@
         theme: 'grid',
         headStyles: { 
             fillColor: [30, 30, 30], 
-            textColor: [212, 175, 55], // Header Text: Emas Premium
+            textColor: [212, 175, 55],
             halign: 'center', 
             font: 'times',
             fontSize: 9,
             fontStyle: 'bold'
         },
-        styles: { 
-            font: 'times', 
-            fontSize: 8, 
-            textColor: [50, 50, 50], // Isi Tabel Utama: Charcoal (Abu Gelap)
-            cellPadding: 3,
-            overflow: 'ellipsize'
-        },
+        styles: { font: 'times', fontSize: 8, textColor: [50, 50, 50], cellPadding: 3, overflow: 'ellipsize' },
         columnStyles: { 
-            0: {
-                halign: 'center', 
-                fontStyle: 'bold',
-                cellWidth: 25,
-                textColor: [0,0,0]
-                },
-            1: { 
-                halign: 'center', 
-                cellWidth: 25,
-                fontStyle: 'bold',
-                textColor: [0,0,0]
-            },
-            2: { 
-                halign: 'center', 
-                cellWidth: 35,
-                fontStyle: 'bold',
-                textColor: [0,0,0]
-                },
-            3: {
-                halign: 'left',
-                fontStyle: 'bold',
-                textColor: [0,0,0]
-                },
-            4: { 
-                halign: 'right', 
-                fontStyle: 'bold', 
-                cellWidth: 30,
-                textColor: [0, 0, 0] // Kolom Nominal: Hitam Pekat agar kontras
-            } 
+            0: { halign: 'center', fontStyle: 'bold', cellWidth: 25, textColor: [0,0,0] },
+            1: { halign: 'center', cellWidth: 25, fontStyle: 'bold', textColor: [0,0,0] },
+            2: { halign: 'center', cellWidth: 35, fontStyle: 'bold', textColor: [0,0,0] },
+            3: { halign: 'left', fontStyle: 'bold', textColor: [0,0,0] },
+            4: { halign: 'right', fontStyle: 'bold', cellWidth: 30, textColor: [0, 0, 0] } 
         },
         didDrawPage: (data) => {
-            // Bingkai Rounded Tabel
             doc.setDrawColor(0, 0, 0);
             doc.setLineWidth(0.4);
             doc.roundedRect(15, 92, 180, data.cursor.y - 92, 2, 2, 'S');
         }
     });
 
-    // --- D. FOOTER TRANSPARANSI ---
     doc.setFontSize(7);
     doc.setTextColor(160, 160, 160);
-    doc.setFont("helvetica", "normal");
     const footerText = "*/Dokumen ini hanya untuk dokumentasi dan transparansi informasi rincian Uang KAS Driver Helper Delta 8 ----Support by : Mancung_168";
     doc.text(footerText, centerX, 285, { align: "center" });
-
     doc.save(`Delta8_Report_${mText}.pdf`);
 }
 
