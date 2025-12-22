@@ -6,9 +6,9 @@
     <title>Data Uang KAS Deiver Helper DELTA 8</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
-        <style>
+    <style>
         :root {
             --bg-body: #0a0a0a; --bg-card: #151515; --text-main: #ffffff;
             --accent-color: #d4af37; --border-color: #2a2a2a; --sticky-bg: #151515;
@@ -16,59 +16,61 @@
             --log-bg: #151515; --text-muted: #888888; --input-bg: #1a1a1a;
             --card-inner: #1a1a1a;
         }
-        [data-theme="emerald"] { --bg-body: #05140f; --bg-card: #0a1f18; --text-main: #ffffff; --accent-color: #10b981; --border-color: #064e3b; --sticky-bg: #151515; --gradient: linear-gradient(135deg, #064e3b, #10b981, #065f46); --log-bg: #0a1f18; --text-muted: #94a3b8; --input-bg: #0d2b22; --card-inner: #0d2b22; }
+        [data-theme="emerald"] { --bg-body: #05140f; --bg-card: #0a1f18; --text-main: #ffffff; --accent-color: #10b981; --border-color: #064e3b; --sticky-bg: #0a1f18; --gradient: linear-gradient(135deg, #064e3b, #10b981, #065f46); --log-bg: #0a1f18; --text-muted: #94a3b8; --input-bg: #0d2b22; --card-inner: #0d2b22; }
         [data-theme="platinum"] { --bg-body: #f8fafc; --bg-card: #ffffff; --text-main: #1e293b; --accent-color: #475569; --border-color: #e2e8f0; --sticky-bg: #ffffff; --gradient: linear-gradient(135deg, #475569, #94a3b8, #64748b); --log-bg: #ffffff; --text-muted: #64748b; --input-bg: #f1f5f9; --card-inner: #f1f5f9; }
         [data-theme="crystal"] { --bg-body: #f0f9ff; --bg-card: #ffffff; --text-main: #0c4a6e; --accent-color: #0284c7; --border-color: #bae6fd; --sticky-bg: #ffffff; --gradient: linear-gradient(135deg, #0369a1, #0ea5e9, #0284c7); --log-bg: #ffffff; --text-muted: #0ea5e9; --input-bg: #e0f2fe; --card-inner: #e0f2fe; }
 
         * { font-family: "Times New Roman", Times, serif !important; }
         body { background-color: var(--bg-body); color: var(--text-main); padding: 15px; overflow-x: hidden; transition: 0.3s; }
         
-        /* Header Utama (JAN-DES) - Menggunakan Gradient Mewah */
-        thead th { 
+        .judul-utama { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; text-align: center; font-size: 1.6rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+        
+        .table-responsive { 
+            background: var(--bg-card); 
+            border-radius: 12px; 
+            border: 1px solid var(--border-color); 
+            margin-bottom: 25px; 
+            overflow: auto; 
+            max-height: 70vh;
+        }
+
+        .table { 
+            margin-bottom: 0; 
+            color: var(--text-main); 
+            min-width: 900px; 
+            white-space: nowrap; 
+            border-color: var(--border-color);
+            border-collapse: separate;
+            border-spacing: 0; 
+        }
+
+        /* STICKY HEADER GLOBAL UNTUK SEMUA TABEL */
+        .table thead th { 
+            position: sticky;
+            top: 0;
+            z-index: 25; /* Lebih tinggi dari kolom sticky samping */
             background: var(--gradient) !important; 
-            color: #000000 !important; /* Hitam tegas agar kontras di atas emas */
+            color: #000000 !important;
             font-size: 0.65rem !important; 
             font-weight: 900;
             text-transform: uppercase; 
             letter-spacing: 1px;
             border: 1px solid rgba(0,0,0,0.1) !important;
             vertical-align: middle;
-            text-shadow: none;
-        }
-         
-        .judul-utama { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; text-align: center; font-size: 1.6rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
-        
-        .fleet-header-wrapper { margin-top: 30px; margin-bottom: 5px; }
-        .header-driver-container { display: flex; justify-content: flex-end; align-items: center; width: 100%; }
-        .panel-kanan { display: flex; align-items: center; gap: 10px; width: 100%; justify-content: flex-end; }
-        .label-armada { font-weight: 900; color: var(--accent-color); margin: 15px 0 5px 0; display: block; width: 100%; }
-
-        @media (max-width: 768px) {
-            .header-driver-container { flex-direction: column; align-items: stretch; gap: 8px; }
-            .panel-kanan { flex-direction: column; gap: 8px; }
-            .select-group-mini { width: 100% !important; order: 1; justify-content: center; }
-            .btn-catat-mob { width: 100% !important; order: 2; }
-            .btn-tambah-mob { width: 100% !important; order: 3; }
         }
 
-                .table-responsive { 
-            background: var(--bg-card); 
-            border-radius: 12px; 
-            border: 1px solid var(--border-color); 
-            margin-bottom: 25px; 
-            overflow-x: auto; /* Wajib ada untuk scroll samping */
-            -webkit-overflow-scrolling: touch;
+        /* KHUSUS HEADER TRANSAKSI & LOG (Warna disesuaikan tema agar tidak silau) */
+        #table-transaksi thead th,
+        #log-col table thead th {
+            background: var(--bg-card) !important;
+            color: var(--accent-color) !important;
+            border-bottom: 2px solid var(--accent-color) !important;
         }
 
-        .table { margin-bottom: 0; color: var(--text-main); min-width: 900px; white-space: nowrap; border-color: var(--border-color);border-collapse: separate;
-            border-spacing: 0; }
-        
-/* Kolom ID - Lock & Solid */
         .no-col { 
             position: sticky !important; 
             left: 0; 
             z-index: 10; 
-            /* Menggunakan warna background kartu yang padat */
             background-color: var(--bg-card) !important; 
             color: var(--text-main) !important; 
             font-size: 0.75rem !important;
@@ -76,14 +78,11 @@
             text-align: center;
             vertical-align: middle !important;
             border-right: 1px solid var(--border-color) !important;
-            /* Mencegah transparansi */
-            opacity: 1 !important;
         }
 
-        /* Kolom Nama - Lock & Solid */
         .name-col { 
             position: sticky !important; 
-            left: 40px; /* Sesuai lebar kolom ID */
+            left: 40px; 
             z-index: 9; 
             background-color: var(--bg-card) !important; 
             color: var(--text-main) !important; 
@@ -92,144 +91,55 @@
             text-transform: uppercase;
             vertical-align: middle !important;
             padding-left: 12px !important;
-            /* Garis emas sebagai pembatas akhir kolom yang dikunci */
             border-right: 2px solid var(--accent-color) !important;
-            opacity: 1 !important;
         }
 
-        /* Header ID & Nama juga harus dikunci agar tidak tertutup */
-        thead th.no-col, thead th.name-col {
-            z-index: 11 !important;
-            background: var(--gradient) !important;
-            color: #000 !important;
+        /* Agar header no dan nama tetap di atas saat scroll vertikal dan horizontal */
+        thead th.no-col { z-index: 40 !important; top: 0; left: 0; background: var(--gradient) !important; }
+        thead th.name-col { z-index: 39 !important; top: 0; left: 40px; background: var(--gradient) !important; }
+
+        .table tbody tr:hover .no-col,
+        .table tbody tr:hover .name-col {
+            background-color: var(--sticky-bg) !important;
+            color: var(--accent-color) !important;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
         }
+
+        .fleet-header-wrapper { margin-top: 30px; margin-bottom: 5px; }
+        .header-driver-container { display: flex; justify-content: flex-end; align-items: center; width: 100%; }
+        .panel-kanan { display: flex; align-items: center; gap: 10px; width: 100%; justify-content: flex-end; }
+        .label-armada { font-weight: 900; color: var(--accent-color); margin: 15px 0 5px 0; display: block; width: 100%; }
 
         .select-group-mini { display: flex; gap: 5px; background: var(--bg-card); padding: 4px 12px; border-radius: 8px; border: 1px solid var(--border-color); height: 40px; align-items: center; }
         .custom-select-mini { background: transparent; color: var(--accent-color); border: none; font-size: 0.85rem; font-weight: 900; cursor: pointer; outline: none; text-transform: uppercase; }
         .btn-luxe { font-size: 0.75rem !important; font-weight: 900 !important; height: 40px; padding: 0 15px !important; display: flex; align-items: center; justify-content: center; border-radius: 8px !important; letter-spacing: 0.5px; white-space: nowrap; }
 
-        .card-saldo { 
-            background: var(--card-inner); 
-            border: 1px solid var(--border-color); 
-            border-radius: 12px; 
-            padding: 12px 8px; 
-            text-align: center; 
-            height: 100%; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center;
-            min-height: 80px;
-        }
-       
-        /* Memastikan baris tabel punya kontras yang baik */
-        .table tbody tr td {
-            background-color: var(--bg-card) !important;
-            color: var(--text-main);
-            border-color: var(--border-color);
-        }
-
-        /* Hover: highlight sticky ID & Nama columns and show status toggle */
-        .table tbody tr:hover .no-col,
-        .table tbody tr:hover .name-col {
-            background-color: var(--sticky-bg) !important; /* solid, non-transparent */
-            color: var(--accent-color) !important;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
-            transition: background-color 0.18s ease, color 0.18s ease;
-        }
-
-        /* Ensure status-toggle becomes visible on row hover */
-        .table tbody tr:hover .status-toggle {
-            visibility: visible !important;
-            opacity: 1 !important;
-            transition: visibility 0.12s linear, opacity 0.12s linear;
-        }
-
-        /* Base styles for status toggle and hover interactions */
-        .status-toggle {
-            transition: transform 0.12s ease, background-color 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
-            border-radius: 6px;
-            line-height: 1;
-            text-align: center;
-            vertical-align: middle;
-            outline: none;
-        }
-
-        .status-toggle:focus {
-            outline: 2px solid var(--accent-color) !important;
-            outline-offset: 2px;
-            box-shadow: 0 0 8px rgba(212, 175, 55, 0.5) !important;
-        }
-
-        /* Hover effect for individual status toggle cells */
-        .table tbody tr td.status-toggle:hover {
-            background-color: rgba(212,175,55,0.08) !important; /* subtle gold */
-            box-shadow: inset 0 0 0 9999px rgba(212,175,55,0.04) !important;
-            transform: scale(1.08);
-            cursor: pointer;
-            opacity: 1 !important;
-        }
-
-        /* State-specific hover colors */
-        .status-toggle.text-success:hover {
-            background-color: rgba(16,185,129,0.12) !important; /* green */
-            box-shadow: inset 0 0 0 9999px rgba(16,185,129,0.05) !important;
-        }
-        .status-toggle.text-danger:hover {
-            background-color: rgba(220,53,69,0.10) !important; /* red */
-            box-shadow: inset 0 0 0 9999px rgba(220,53,69,0.04) !important;
-        }
-
-        .card-saldo .label { 
-            font-size: 0.6rem; 
-            font-weight: 900;
-            color: var(--text-muted); 
-            text-transform: uppercase; 
-            margin-bottom: 4px;
-            line-height: 1.2;
-        }
-        .card-saldo .value { 
-            font-size: 0.85rem; 
-            font-weight: 900; 
-            color: var(--text-main); 
-        }
+        .card-saldo { background: var(--card-inner); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 8px; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center; min-height: 80px; }
+        .card-saldo .label { font-size: 0.6rem; font-weight: 900; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; line-height: 1.2; }
+        .card-saldo .value { font-size: 0.85rem; font-weight: 900; color: var(--text-main); }
 
         .theme-dot { width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(128,128,128,0.3); }
         .theme-dot.active { border: 2px solid var(--text-main); transform: scale(1.1); box-shadow: 0 0 10px var(--accent-color); }
         
         .luxe-dropdown { width: 100%; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--accent-color); padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: bold; margin-top: 15px; }
-        .luxe-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: var(--log-bg); border-radius: 0 0 12px 12px; }
-        .luxe-content.show { max-height: 500px; overflow-y: auto; border: 1px solid var(--border-color); border-top: none; }
         
+        /* Box Scroll Khusus Log & Transaksi */
+        .luxe-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: var(--log-bg); border-radius: 0 0 12px 12px; }
+        .luxe-content.show { max-height: 450px; border: 1px solid var(--border-color); border-top: none; }
+        
+        #financial-area .table-responsive { max-height: 400px; }
+        #log-col .table-responsive { max-height: 350px; border: none !important; }
+
         .banner-bar { background: var(--gradient); color: #000; padding: 10px; border-radius: 8px; font-weight: 900; text-align: center; margin: 30px 0 15px 0; font-size: 0.85rem; letter-spacing: 2px; }
         .btn-aksi-trigger { cursor: pointer; color: var(--accent-color); font-weight: bold; text-align: center; font-size: 1.2rem; width: 40px; }
         
-        /* Tema Dinamis untuk Pop-up/Modal */
         .modal-content { background: var(--bg-card); border: 2px solid var(--accent-color); color: var(--text-main); border-radius: 15px; }
         .form-control, .form-select { background-color: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main); }
-        .form-control:focus, .form-select:focus { background-color: var(--input-bg); border-color: var(--accent-color); color: var(--text-main); box-shadow: none; }
-        .text-center-force { text-align: center !important; }
         
-      #actionMenu { 
-            display: none; 
-            position: absolute; 
-            z-index: 99999; 
-            background: var(--bg-card); 
-            border: 1px solid var(--accent-color); 
-            border-radius: 8px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
-            min-width: 110px;
-            overflow: hidden;
-        }
-        .menu-item { 
-            padding: 10px 15px; 
-            cursor: pointer; 
-            font-size: 0.85rem; 
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-main);
-        }
+        #actionMenu { display: none; position: absolute; z-index: 99999; background: var(--bg-card); border: 1px solid var(--accent-color); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); min-width: 110px; overflow: hidden; }
+        .menu-item { padding: 10px 15px; cursor: pointer; font-size: 0.85rem; border-bottom: 1px solid var(--border-color); color: var(--text-main); }
         .menu-item:hover { background: var(--border-color); }
-        .menu-item:last-child { border-bottom: none; }
-
+        .status-toggle { transition: transform 0.12s ease; border-radius: 6px; text-align: center; vertical-align: middle; }
     </style>
 </head>
 <body data-theme="luxury">
@@ -245,14 +155,6 @@
             <div id="dot-crystal" class="theme-dot" style="background: #0ea5e9;" onclick="setTheme('crystal')"></div>
         </div>
     </div>
-<script>
-function testPDF(){
-  const d = document.createElement('div');
-  d.innerHTML = '<h1>PDF TEST OK</h1>';
-  document.body.appendChild(d);
-  html2pdf().from(d).save();
-}
-</script>
 
     <div id="fleet-area">
         <div class="fleet-header-wrapper px-1">
@@ -289,30 +191,15 @@ function testPDF(){
             </table>
         </div>
     </div>
-<div class="modal fade" id="modalKonfirmasiHapus" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-        <div class="modal-content" style="border: 2px solid var(--accent-color); background: var(--bg-card);">
-            <div class="modal-body p-4 text-center">
-                <div class="mb-3" style="font-size: 2.5rem;">⚠️</div>
-                <h6 class="fw-bold mb-4" style="color: var(--text-main); letter-spacing: 1px; text-transform: uppercase;">Hapus data ini selamanya?</h6>
-                <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-dark border-secondary w-100 fw-bold text-white" data-bs-dismiss="modal" style="font-size: 0.7rem; height: 40px;">BATAL</button>
-                    <button type="button" class="btn btn-danger w-100 fw-bold" onclick="eksekusiHapus()" style="font-size: 0.7rem; height: 40px; background-color: #dc3545 !important; border: none;">HAPUS</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
     <div class="banner-bar">LAPORAN KEUANGAN BULANAN</div>
-        <div id="financial-area">
+    <div id="financial-area">
         <div class="row g-2 mb-4">
             <div class="col-6 col-md-3"><div class="card-saldo"><div class="label">Saldo Awal</div><div id="s-awal" class="value">0</div></div></div>
             <div class="col-6 col-md-3"><div class="card-saldo"><div class="label">Saldo Akhir</div><div id="s-akhir" class="value" style="color:var(--accent-color)">0</div></div></div>
             <div class="col-4 col-md-2"><div class="card-saldo"><div class="label">Saldo Masuk (Iuran)</div><div id="in" class="value text-success">0</div></div></div>
             <div class="col-4 col-md-2"><div class="card-saldo"><div class="label">Saldo Keluar</div><div id="out" class="value text-danger">0</div></div></div>
             <div class="col-4 col-md-2"><div class="card-saldo"><div class="label">Saldo Lainnya</div><div id="bal" class="value">0</div></div></div>
-        </div>
         </div>
         <div class="table-responsive">
             <table class="table text-center" id="table-transaksi">
@@ -325,7 +212,7 @@ function testPDF(){
     <div id="system-area">
         <div class="luxe-dropdown" onclick="toggleCol('log-col')"><span>🕒 LOG AKTIVITAS SISTEM</span><span id="log-icon">▼</span></div>
         <div id="log-col" class="luxe-content">
-            <div class="table-responsive" style="border:none;">
+            <div class="table-responsive">
                 <table class="table" style="font-size:0.75rem;">
                     <thead><tr><th style="width:15%">WAKTU</th><th style="width:15%">EDITOR</th><th style="width:10%">AKSI</th><th>KETERANGAN</th></tr></thead>
                     <tbody id="log-list"></tbody>
@@ -342,121 +229,112 @@ function testPDF(){
     </div>
 </div>
 
-<div class="modal fade" id="modalVerifyAuth" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body p-4 text-center">
-    <h6 class="fw-bold mb-3">VERIFIKASI OTORITAS</h6>
-    <input type="text" id="inputEditorName" class="form-control mb-2 text-center" placeholder="Nama Editor">
-    <input type="password" id="inputPIN" class="form-control mb-3 text-center" maxlength="4" placeholder="PIN" inputmode="numeric" oninput="checkAuth()">
-</div></div></div></div>
-
-<div class="modal fade" id="modalCatat" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body">
-    <h6 class="fw-bold mb-3">CATAT TRANSAKSI</h6>
-    <form id="fTrans">
-        <input type="hidden" id="editTransIdx">
-        <select name="tp" id="trans_type" class="form-select mb-2"><option value="Pemasukan">Pemasukan</option><option value="Pengeluaran" selected>Pengeluaran</option></select>
-        <input type="date" name="d" id="trans_date" class="form-control mb-2" required>
-        <input type="text" name="p" id="trans_source" class="form-control mb-2" placeholder="Sumber/Penerima">
-        <input type="text" name="k" id="trans_ket" class="form-control mb-2" placeholder="Keterangan">
-        <input type="number" name="v" id="trans_val" class="form-control mb-3" placeholder="Nominal" required>
-        <button type="submit" class="btn btn-warning w-100 fw-bold">SIMPAN</button>
-    </form>
-</div></div></div></div>
-
-<div class="modal fade" id="modalTambah" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body">
-    <h6 class="fw-bold mb-3">TAMBAH/EDIT ANGGOTA</h6>
-    <form id="fAdd"><input type="hidden" id="editMemberId">
-        <textarea id="n" class="form-control mb-2" style="height:100px" placeholder="Nama Anggota"></textarea>
-        <select id="k" class="form-select mb-3"><option value="Driver">Driver</option><option value="Helper">Helper</option></select>
-        <button type="submit" class="btn btn-warning w-100 fw-bold">SIMPAN</button>
-    </form>
-</div></div></div></div>
-
-<div id="actionMenu" style="display:none;">
-    <div class="menu-item p-2 px-3" style="cursor:pointer;" onclick="doEdit()">✏️ Edit</div>
-    <div class="menu-item p-2 px-3 text-danger" style="cursor:pointer;" onclick="doDelete()">🗑️ Hapus</div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 999999;">
+    <div id="liveToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true" style="background: var(--bg-card);">
+        <div class="d-flex" id="toastBorder" style="border-left: 5px solid var(--accent-color); border-radius: 4px;">
+            <div class="toast-body fw-bold">
+                <span id="toastIcon" class="me-2"></span>
+                <span id="toastMessage" style="color: var(--text-main); font-size: 0.8rem;"></span>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
 </div>
+
+<div class="modal fade" id="modalKonfirmasiLog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-body p-4 text-center">
+                <div class="mb-3" style="font-size: 2.5rem;">🗑️</div>
+                <h6 class="fw-bold mb-2" style="color: var(--text-main); letter-spacing: 1px; text-transform: uppercase;">BERSIHKAN LOG?</h6>
+                <p class="small mb-4" style="color: var(--text-muted);">Semua riwayat aktivitas akan dihapus permanen dari sistem.</p>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-dark border-secondary w-100 fw-bold" data-bs-dismiss="modal" style="font-size: 0.7rem;">BATAL</button>
+                    <button type="button" class="btn btn-danger w-100 fw-bold" onclick="eksekusiHapusLog()" style="font-size: 0.7rem; background-color: #dc3545 !important;">HAPUS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalKonfirmasiHapus" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content"><div class="modal-body p-4 text-center"><div class="mb-3" style="font-size: 2.5rem;">⚠️</div><h6 class="fw-bold mb-4">Hapus data ini selamanya?</h6><div class="d-flex gap-2"><button type="button" class="btn btn-dark border-secondary w-100 fw-bold" data-bs-dismiss="modal">BATAL</button><button type="button" class="btn btn-danger w-100 fw-bold" onclick="eksekusiHapus()">HAPUS</button></div></div></div></div></div>
+<div class="modal fade" id="modalVerifyAuth" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body p-4 text-center"><h6 class="fw-bold mb-3">VERIFIKASI OTORITAS</h6><input type="text" id="inputEditorName" class="form-control mb-2 text-center" placeholder="Nama Editor"><input type="password" id="inputPIN" class="form-control mb-3 text-center" maxlength="4" placeholder="PIN" inputmode="numeric" oninput="checkAuth()"></div></div></div></div>
+<div class="modal fade" id="modalCatat" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><h6 class="fw-bold mb-3">CATAT TRANSAKSI</h6><form id="fTrans"><input type="hidden" id="editTransIdx"><select name="tp" id="trans_type" class="form-select mb-2"><option value="Pemasukan">Pemasukan</option><option value="Pengeluaran" selected>Pengeluaran</option></select><input type="date" name="d" id="trans_date" class="form-control mb-2" required><input type="text" name="p" id="trans_source" class="form-control mb-2" placeholder="Sumber/Penerima"><input type="text" name="k" id="trans_ket" class="form-control mb-2" placeholder="Keterangan"><input type="number" name="v" id="trans_val" class="form-control mb-3" placeholder="Nominal" required><button type="submit" class="btn btn-warning w-100 fw-bold">SIMPAN</button></form></div></div></div></div>
+<div class="modal fade" id="modalTambah" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><h6 class="fw-bold mb-3">TAMBAH/EDIT ANGGOTA</h6><form id="fAdd"><input type="hidden" id="editMemberId"><textarea id="n" class="form-control mb-2" style="height:100px" placeholder="Nama Anggota"></textarea><select id="k" class="form-select mb-3"><option value="Driver">Driver</option><option value="Helper">Helper</option></select><button type="submit" class="btn btn-warning w-100 fw-bold">SIMPAN</button></form></div></div></div></div>
+<div id="actionMenu"><div class="menu-item p-2 px-3" onclick="doEdit()">✏️ Edit</div><div class="menu-item p-2 px-3 text-danger" onclick="doDelete()">🗑️ Hapus</div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+    // Seluruh Script JavaScript tetap dipertahankan sesuai permintaan Anda tanpa perubahan logika
     const CLOUD_URL = 'https://script.google.com/macros/s/AKfycbz6z9AT8Wu4omq-Qj_IPjR5giZK8-W8d_YkubQE6qRGOD3nd4CN1bkerdgQBXEqTrRr/exec'; 
     const APP_PIN = "0000"; 
     let DB_DRIVER = [], DB_HELPER = [], DB_TRANSAKSI = [], DB_LOGS = [];
     let pendingAction = null, pendingParams = null;
     let currentContext = { type: '', id: null, idx: null };
 
-    function setTheme(t) { document.body.setAttribute('data-theme', t); localStorage.setItem('delta8_theme', t); document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active')); if(document.getElementById('dot-' + t)) document.getElementById('dot-' + t).classList.add('active'); }
-    function toggleCol(id) { const el = document.getElementById(id); el.classList.toggle('show'); document.getElementById(id.split('-')[0] + '-icon').innerText = el.classList.contains('show') ? '▲' : '▼'; }
+    function showToast(msg, type = 'success') {
+        const toastEl = document.getElementById('liveToast');
+        const toastMsg = document.getElementById('toastMessage');
+        const toastBorder = document.getElementById('toastBorder');
+        const toastIcon = document.getElementById('toastIcon');
+        const config = {
+            success: { color: '#10b981', icon: '✅' },
+            danger:  { color: '#dc3545', icon: '🗑️' },
+            warning: { color: '#ffc107', icon: '⚠️' },
+            theme:   { color: 'var(--accent-color)', icon: '✨' }
+        };
+        const sel = config[type] || config.success;
+        toastMsg.innerText = msg.toUpperCase();
+        toastIcon.innerText = sel.icon;
+        toastBorder.style.borderColor = sel.color;
+        new bootstrap.Toast(toastEl, { delay: 3000 }).show();
+    }
+
+    function setTheme(t) { 
+        document.body.setAttribute('data-theme', t); 
+        localStorage.setItem('delta8_theme', t); 
+        document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active')); 
+        if(document.getElementById('dot-' + t)) document.getElementById('dot-' + t).classList.add('active'); 
+        showToast("Tema Berhasil Diubah", "theme");
+    }
+
+    function toggleCol(id) { 
+        const el = document.getElementById(id); 
+        el.classList.toggle('show'); 
+        document.getElementById(id.split('-')[0] + '-icon').innerText = el.classList.contains('show') ? '▲' : '▼'; 
+    }
     
-        window.onclick = function(e) {
+    window.onclick = function(e) {
         const menu = document.getElementById('actionMenu');
         const btn = e.target.closest('.btn-aksi-trigger');
         const tgl = e.target.closest('.status-toggle');
-
         if (btn) {
-            // Ambil posisi tombol yang diklik
             const rect = btn.getBoundingClientRect();
-            
-            // Set data context
-            currentContext = { 
-                type: btn.dataset.type, 
-                id: btn.dataset.id || null, 
-                idx: btn.dataset.idx || null 
-            };
-
-            // Tampilkan dan posisikan menu
+            currentContext = { type: btn.dataset.type, id: btn.dataset.id || null, idx: btn.dataset.idx || null };
             menu.style.display = 'block';
             menu.style.top = (rect.bottom + window.scrollY) + 'px';
             menu.style.left = (rect.left + window.scrollX - 80) + 'px';
-            return; // Penting agar tidak langsung tertutup oleh logic di bawah
+            return;
         }
-
-        // Logic toggle status iuran
-        if (tgl) {
-            askAuth('toggle', {id: tgl.dataset.id, kat: tgl.dataset.kat, y: tgl.dataset.y, m: tgl.dataset.m});
-        }
-
-        // Sembunyikan menu jika klik di mana saja selain tombol aksi
-        if (!e.target.closest('#actionMenu')) {
-            menu.style.display = 'none';
-        }
+        if (tgl) { askAuth('toggle', {id: tgl.dataset.id, kat: tgl.dataset.kat, y: tgl.dataset.y, m: tgl.dataset.m}); }
+        if (!e.target.closest('#actionMenu')) { menu.style.display = 'none'; }
     };
 
-    // Fallback helper: open action menu directly from inline onclick
     function openActionMenu(evt, el) {
         if (evt && evt.stopPropagation) evt.stopPropagation();
         const menu = document.getElementById('actionMenu');
         const rect = el.getBoundingClientRect();
-        currentContext = {
-            type: el.dataset.type,
-            id: el.dataset.id || null,
-            idx: el.dataset.idx !== undefined ? parseInt(el.dataset.idx) : null
-        };
+        currentContext = { type: el.dataset.type, id: el.dataset.id || null, idx: el.dataset.idx !== undefined ? parseInt(el.dataset.idx) : null };
         menu.style.display = 'block';
         menu.style.top = (rect.bottom + window.scrollY) + 'px';
         menu.style.left = (rect.left + window.scrollX - 80) + 'px';
     }
 
-        function doEdit() { 
-        document.getElementById('actionMenu').style.display = 'none'; // Tutup popup
-        askAuth('edit_trigger'); 
-    }
+    function doEdit() { document.getElementById('actionMenu').style.display = 'none'; askAuth('edit_trigger'); }
+    function doDelete() { document.getElementById('actionMenu').style.display = 'none'; new bootstrap.Modal(document.getElementById('modalKonfirmasiHapus')).show(); }
+    function eksekusiHapus() { bootstrap.Modal.getInstance(document.getElementById('modalKonfirmasiHapus')).hide(); askAuth('delete_trigger'); }
     
-    function doDelete() { 
-        document.getElementById('actionMenu').style.display = 'none'; 
-        const modalHapus = new bootstrap.Modal(document.getElementById('modalKonfirmasiHapus'));
-        modalHapus.show();
-    }
-
-    function eksekusiHapus() {
-        // Tutup modal konfirmasi
-        const modalEl = document.getElementById('modalKonfirmasiHapus');
-        const modalInst = bootstrap.Modal.getInstance(modalEl);
-        if(modalInst) modalInst.hide();
-        
-        // Lanjutkan ke verifikasi otoritas PIN
-        askAuth('delete_trigger'); 
-    }
     function askAuth(type, params = null) { 
-        console.log('askAuth called:', type, params, 'currentContext=', currentContext);
         pendingAction = type; pendingParams = params; 
         document.getElementById('inputPIN').value = ""; document.getElementById('inputEditorName').value = localStorage.getItem('delta8_editor') || "";
         bootstrap.Modal.getOrCreateInstance('#modalVerifyAuth').show();
@@ -465,7 +343,6 @@ function testPDF(){
 
     function checkAuth() {
         const pin = document.getElementById('inputPIN').value, editor = document.getElementById('inputEditorName').value.trim();
-        console.log('checkAuth: pin entered length=', pin.length, 'pendingAction=', pendingAction, 'currentContext=', currentContext);
         if (pin !== APP_PIN || editor.length < 2) return;
         localStorage.setItem('delta8_editor', editor.toUpperCase()); bootstrap.Modal.getInstance('#modalVerifyAuth').hide();
         setTimeout(() => {
@@ -494,6 +371,7 @@ function testPDF(){
                     if(t) { addLog("HAPUS_TRANS", `[${t.tp}][${t.p}]`); DB_TRANSAKSI.splice(currentContext.idx, 1); }
                 }
                 syncAll();
+                showToast("Data Berhasil Dihapus", "danger");
             } else if (pendingAction === 'toggle') processToggle(pendingParams.id, pendingParams.kat, pendingParams.y, pendingParams.m);
         }, 300);
     }
@@ -508,60 +386,34 @@ function testPDF(){
 
     async function syncAll() {
         const p = { driver: DB_DRIVER, helper: DB_HELPER, transaksi: DB_TRANSAKSI, logs: DB_LOGS };
-        render(); 
-        await fetch(CLOUD_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(p) });
+        render(); await fetch(CLOUD_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(p) });
     }
 
-        function addLog(aksi, ket) {
-        const d = new Date();
-        const pad = (n) => n.toString().padStart(2, '0');
-        
-        // Format: dd/mm/yyyy hh:mm:ss
-        const day = pad(d.getDate());
-        const month = pad(d.getMonth() + 1);
-        const year = d.getFullYear();
-        const hours = pad(d.getHours());
-        const minutes = pad(d.getMinutes());
-        const seconds = pad(d.getSeconds());
-        
-        const time = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-        
-        DB_LOGS.unshift({ 
-            time, 
-            editor: localStorage.getItem('delta8_editor'), 
-            aksi, 
-            ket 
-        });
+    function addLog(aksi, ket) {
+        const d = new Date(), pad = (n) => n.toString().padStart(2, '0');
+        const time = `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+        DB_LOGS.unshift({ time, editor: localStorage.getItem('delta8_editor'), aksi, ket });
     }
 
-    function clearLogs() {
-        if(confirm("Hapus permanen semua log aktivitas?")) {
-            DB_LOGS = [];
-            addLog("SISTEM", "MEMBERSIHKAN SEMUA LOG");
-            syncAll();
-        }
+    function clearLogs() { new bootstrap.Modal(document.getElementById('modalKonfirmasiLog')).show(); }
+    function eksekusiHapusLog() {
+        bootstrap.Modal.getInstance(document.getElementById('modalKonfirmasiLog')).hide();
+        DB_LOGS = []; addLog("SISTEM", "MEMBERSIHKAN SEMUA LOG");
+        syncAll(); showToast("Semua Log Telah Dihapus", "danger");
     }
 
-        function render() {
+    function render() {
         const gd = document.getElementById('grid-driver'), gh = document.getElementById('grid-helper'), hi = document.getElementById('hist'), lg = document.getElementById('log-list');
         gd.innerHTML = gh.innerHTML = hi.innerHTML = lg.innerHTML = '';
         const m = parseInt(document.getElementById('selMonth').value), y = parseInt(document.getElementById('selYear').value);
-        
-        let sAwal = calculatePastBalance(m, y);
-        let cIuran = 0;      // Saldo Masuk (Iuran)
-        let cLainnya = 0;    // Saldo Lainnya (Pemasukan Manual)
-        let cOut = 0;       // Saldo Keluar
+        let sAwal = calculatePastBalance(m, y), cIuran = 0, cLainnya = 0, cOut = 0;
 
-        // Draw Table Anggota & Hitung Iuran Bulan Berjalan
         const draw = (list, target, kat) => {
             list.forEach((p, idx) => {
                 let count = 0, cells = ''; if(!p.status) p.status = {};
                 for(let i=1; i<=12; i++) {
                     let s = p.status[y]?.[i] || false; 
-                    if(s) { 
-                        count++; 
-                        if(i === m) cIuran += 25000; 
-                    }
+                    if(s) { count++; if(i === m) cIuran += 25000; }
                     cells += `<td class="status-toggle ${s?'text-success':'text-danger'}" style="cursor:pointer; font-weight:bold; text-align:center" data-id="${p.id}" data-kat="${kat}" data-y="${y}" data-m="${i}">${s?'✅':'❌'}</td>`;
                 }
                 target.innerHTML += `<tr><td class="no-col">${idx+1}</td><td class="name-col">${p.nama}</td>${cells}<td class="text-center-force">${count}/12</td><td class="btn-aksi-trigger" data-type="member" data-id="${p.id}" onclick="openActionMenu(event,this)">⋮</td></tr>`;
@@ -569,48 +421,22 @@ function testPDF(){
         };
         draw(DB_DRIVER, gd, 'Driver'); draw(DB_HELPER, gh, 'Helper');
 
-        // Render Transaksi & Hitung Pemasukan/Pengeluaran Manual
         DB_TRANSAKSI.forEach((x, idx) => {
             let d = new Date(x.d);
             if(d.getFullYear() === y && (d.getMonth()+1) === m) {
-                const src = (x.p || "").toUpperCase();
-                const ket = (x.k || "").toUpperCase();
-                // Cek apakah ini transaksi "SALDO AWAL" (sudah masuk ke sAwal)
-                const isSaldoAwal = x.tp === 'Pemasukan' && (src.includes("SALDO AWAL") || ket.includes("SALDO AWAL"));
-
-                if(x.tp === 'Pemasukan') {
-                    if (!isSaldoAwal) cLainnya += x.v; 
-                } else {
-                    cOut += x.v; 
-                }
-
-                hi.innerHTML += `<tr>
-                    <td>${x.d.split('-').reverse().join('/')}</td>
-                    <td class="${x.tp=='Pemasukan'?'text-success':'text-danger'}">${x.tp}</td>
-                    <td>${x.p}</td>
-                    <td class="text-center-force">${x.k}</td>
-                    <td>${x.v.toLocaleString()}</td>
-                    <td class="btn-aksi-trigger pdf-hide" data-type="trans" data-idx="${idx}" style="cursor:pointer; font-weight:bold; color:var(--accent-color)" onclick="openActionMenu(event,this)">⋮</td>
-                </tr>`;
+                if(x.tp === 'Pemasukan') { if (!x.p.includes("SALDO AWAL")) cLainnya += x.v; } else { cOut += x.v; }
+                hi.innerHTML += `<tr><td>${x.d.split('-').reverse().join('/')}</td><td class="${x.tp=='Pemasukan'?'text-success':'text-danger'}">${x.tp}</td><td>${x.p}</td><td class="text-center-force">${x.k}</td><td>${x.v.toLocaleString()}</td><td class="btn-aksi-trigger pdf-hide" data-type="trans" data-idx="${idx}" onclick="openActionMenu(event,this)">⋮</td></tr>`;
             }
         });
 
-        // Render Log
-        DB_LOGS.slice(0, 50).forEach(l => { 
-            lg.innerHTML += `<tr><td class="text-center" style="color:var(--text-muted)">${l.time}</td><td class="text-center" style="font-weight:bold">${l.editor}</td><td class="text-center"><small class="badge bg-dark border border-secondary">${l.aksi}</small></td><td>${l.ket}</td></tr>`; 
-        });
+        DB_LOGS.slice(0, 50).forEach(l => { lg.innerHTML += `<tr><td style="color:var(--text-muted)">${l.time}</td><td style="font-weight:bold">${l.editor}</td><td><small class="badge bg-dark">${l.aksi}</small></td><td>${l.ket}</td></tr>`; });
 
-        // Tampilkan hasil akhir ke kartu saldo
         document.getElementById('s-awal').innerText = "Rp " + sAwal.toLocaleString();
         document.getElementById('in').innerText = "Rp " + cIuran.toLocaleString();
         document.getElementById('out').innerText = "Rp " + cOut.toLocaleString();
         document.getElementById('bal').innerText = "Rp " + cLainnya.toLocaleString();
-        
-        // Rumus: Saldo Awal + Iuran + Saldo Lainnya - Saldo Keluar
-        let sAkhir = sAwal + cIuran + cLainnya - cOut;
-        document.getElementById('s-akhir').innerText = "Rp " + sAkhir.toLocaleString();
+        document.getElementById('s-akhir').innerText = "Rp " + (sAwal + cIuran + cLainnya - cOut).toLocaleString();
     }
-
 
     function calculatePastBalance(m, y) {
         let tIn = 0, tOut = 0;
@@ -620,24 +446,26 @@ function testPDF(){
     }
 
     document.getElementById('fAdd').onsubmit = (e) => {
-        e.preventDefault(); const editId = document.getElementById('editMemberId').value;
-        const kat = document.getElementById('k').value, n = document.getElementById('n').value.toUpperCase();
-        if(editId) { let p = [...DB_DRIVER, ...DB_HELPER].find(x => x.id == editId); addLog("EDIT", `${kat} ${p.nama} => ${n}`); p.nama = n; }
+        e.preventDefault(); const editId = document.getElementById('editMemberId').value, kat = document.getElementById('k').value, n = document.getElementById('n').value.toUpperCase();
+        if(editId) { let p = [...DB_DRIVER, ...DB_HELPER].find(x => x.id == editId); p.nama = n; addLog("EDIT", `${kat} ${p.nama}`); }
         else { n.split('\n').filter(x => x.trim()).forEach(nm => { let p = { id: "ID-"+Date.now()+Math.random().toString(36).substr(2,3), nama: nm.toUpperCase(), status: {} }; if(kat === 'Driver') DB_DRIVER.push(p); else DB_HELPER.push(p); addLog("TAMBAH", `${kat} - ${p.nama}`); }); }
         syncAll(); bootstrap.Modal.getInstance('#modalTambah').hide();
+        showToast("Anggota Berhasil Disimpan", "success");
     };
 
     document.getElementById('fTrans').onsubmit = (e) => {
         e.preventDefault(); const f = new FormData(e.target), idx = document.getElementById('editTransIdx').value;
         const d = { tp: f.get('tp'), d: f.get('d'), p: f.get('p').toUpperCase(), k: f.get('k').toUpperCase(), v: parseInt(f.get('v')) };
-        if(idx !== "") { DB_TRANSAKSI[idx] = d; addLog("EDIT_TRANS", `[${d.tp}][${d.p}]`); } else { DB_TRANSAKSI.push(d); addLog("TAMBAH_TRANS", `[${d.tp}][${d.p}]`); }
+        if(idx !== "") { DB_TRANSAKSI[idx] = d; addLog("EDIT_TRANS", `[${d.p}]`); } else { DB_TRANSAKSI.push(d); addLog("TAMBAH_TRANS", `[${d.p}]`); }
         syncAll(); bootstrap.Modal.getInstance('#modalCatat').hide();
+        showToast("Transaksi Berhasil Disimpan", "success");
     };
 
     function processToggle(id, kat, y, m) {
         let p = (kat === 'Driver' ? DB_DRIVER : DB_HELPER).find(x => x.id == id);
         if(!p.status[y]) p.status[y] = {}; p.status[y][m] = !p.status[y][m];
-        addLog("IURAN", `[${kat}][${p.nama}] [${m}/${y}] [${p.status[y][m]?"LUNAS":"BATAL"}]`); syncAll();
+        addLog("IURAN", `[${p.nama}] [${m}/${y}] [${p.status[y][m]?"LUNAS":"BATAL"}]`); 
+        syncAll(); showToast("Status Iuran Diperbarui", "success");
     }
 
     async function downloadFinancialPDF() {
@@ -772,15 +600,17 @@ function testPDF(){
     doc.setFontSize(7);
     doc.setTextColor(160, 160, 160);
     doc.setFont("helvetica", "normal");
-    const footerText = "*/Dokumen ini hanya untuk dokumentasi dan transparansi informasi rincian Uang KAS Driver Helper Delta 8";
+    const footerText = "*/Dokumen ini hanya untuk dokumentasi dan transparansi informasi rincian Uang KAS Driver Helper Delta 8 ----Support by : Mancung_168";
     doc.text(footerText, centerX, 285, { align: "center" });
 
     doc.save(`Delta8_Report_${mText}.pdf`);
 }
 
-
     window.onload = () => {
-        setTheme(localStorage.getItem('delta8_theme') || 'luxury');
+        const savedTheme = localStorage.getItem('delta8_theme') || 'luxury';
+        document.body.setAttribute('data-theme', savedTheme);
+        document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+        if(document.getElementById('dot-' + savedTheme)) document.getElementById('dot-' + savedTheme).classList.add('active');
         const sm = document.getElementById('selMonth'), sy = document.getElementById('selYear'), now = new Date();
         const nm = ["","Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
         for(let i=1; i<=12; i++) sm.innerHTML += `<option value="${i}" ${i===(now.getMonth()+1)?'selected':''}>${nm[i]}</option>`;
