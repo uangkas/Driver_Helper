@@ -110,8 +110,30 @@
         .panel-kanan { display: flex; align-items: center; gap: 10px; width: 100%; justify-content: flex-end; }
         .label-armada { font-weight: 900; color: var(--accent-color); margin: 15px 0 5px 0; display: block; width: 100%; }
 
-        .select-group-mini { display: flex; gap: 5px; background: var(--bg-card); padding: 4px 12px; border-radius: 8px; border: 1px solid var(--border-color); height: 40px; align-items: center; }
-        .custom-select-mini { background: transparent; color: var(--accent-color); border: none; font-size: 0.85rem; font-weight: 900; cursor: pointer; outline: none; text-transform: uppercase; }
+        /* Penyesuaian Ukuran Pilihan Bulan dan Tahun */
+.select-group-mini { 
+    display: flex; 
+    gap: 2px; /* Jarak antar select lebih rapat */
+    background: var(--bg-card); 
+    padding: 2px 8px; /* Padding dikurangi */
+    border-radius: 8px; 
+    border: 1px solid var(--border-color); 
+    height: 36px; /* Tinggi disamakan atau sedikit lebih kecil dari tombol */
+    align-items: center; 
+}
+
+.custom-select-mini { 
+    background: transparent; 
+    color: var(--accent-color); 
+    border: none; 
+    font-size: 0.75rem; /* Font diperkecil dari 0.85rem */
+    font-weight: 900; 
+    cursor: pointer; 
+    outline: none; 
+    text-transform: uppercase; 
+    padding: 0 2px;
+}
+
         .btn-luxe { font-size: 0.75rem !important; font-weight: 900 !important; height: 40px; padding: 0 15px !important; display: flex; align-items: center; justify-content: center; border-radius: 8px !important; letter-spacing: 0.5px; white-space: nowrap; }
 
         .card-saldo { background: var(--card-inner); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 8px; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center; min-height: 80px; }
