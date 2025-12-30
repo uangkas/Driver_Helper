@@ -365,7 +365,7 @@
                 &copy; 2026 ALL MANAGEMENT MEMBERS.
             </div>
             <div style="margin-top: 10px;">
-                <strong style="font-size: 13px; color: var(--accent-color); letter-spacing: 2px;">
+                <strong style="font-size: 8px; color: var(--accent-color); letter-spacing: 2px;">
                     ---<{SUPPORTED BY : MANCUNG_168}>---
                 </strong>
             </div>
@@ -512,11 +512,15 @@
         function clearLogs() { new bootstrap.Modal('#modalKonfirmasiLog').show(); }
         function eksekusiHapusLog() { bootstrap.Modal.getInstance('#modalKonfirmasiLog').hide(); addLog("SYSTEM", "BERSIHKAN SEMUA LOG"); DB_LOGS = []; syncAll(); }
 
-        function render() {
+                function render() {
             const gd = document.getElementById('grid-driver'), gh = document.getElementById('grid-helper'), hi = document.getElementById('hist'), lg = document.getElementById('log-list');
             gd.innerHTML = gh.innerHTML = hi.innerHTML = lg.innerHTML = '';
             const m = parseInt(document.getElementById('selMonth').value), y = parseInt(document.getElementById('selYear').value);
             let sAwal = calculatePastBalance(m, y), cIuran = 0, cLainnya = 0, cOut = 0;
+
+            // Memasukkan logika pengurutan A-Z sebelum data digambar
+            const sortedDrivers = [...DB_DRIVER].sort((a, b) => a.nama.localeCompare(b.nama));
+            const sortedHelpers = [...DB_HELPER].sort((a, b) => a.nama.localeCompare(b.nama));
 
             const draw = (list, target, kat) => {
                 list.forEach((p, idx) => {
@@ -528,7 +532,10 @@
                     target.innerHTML += `<tr><td class="no-col">${idx + 1}</td><td class="name-col">${p.nama}</td>${cells}<td class="text-center-force">${count}/12</td><td class="col-aksi-center"><div class="btn-aksi-trigger" data-type="member" data-id="${p.id}">⋮</div></td></tr>`;
                 });
             };
-            draw(DB_DRIVER, gd, 'Driver'); draw(DB_HELPER, gh, 'Helper');
+
+            // Menggunakan data yang sudah terurut
+            draw(sortedDrivers, gd, 'Driver'); 
+            draw(sortedHelpers, gh, 'Helper');
 
             DB_TRANSAKSI.forEach((x, idx) => {
                 let d = new Date(x.d);
@@ -714,7 +721,7 @@
                 doc.text(`--<{SUPPORTED BY : MANCUNG_168}>--`, 105, 290, { align: "center" } );
             }
 
-            doc.save(`FINANCE_OFFICIAL_${editorName}_${mText}.pdf`);
+            doc.save(`LAPORAN_KAS_${editorName}_${mText}.pdf`);
         }
 
         window.onload = () => {
