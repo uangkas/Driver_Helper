@@ -185,13 +185,27 @@
         
         #actionMenu { display: none; position: absolute; z-index: 99999; background: var(--bg-card); border: 1px solid var(--accent-color); border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); min-width: 110px; overflow: hidden; }
         .menu-item { padding: 10px 15px; cursor: pointer; font-size: 0.85rem; border-bottom: 1px solid var(--border-color); color: var(--text-main); }
-        .footer-app {
-            margin-top: 80px;
-            padding: 40px 15px;
+                .footer-app {
+            margin-top: 40px;
+            padding: 40px 0;
             text-align: center;
             border-top: 1px solid var(--border-color);
-            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3));
+            
+            /* Gradasi dari atas ke bawah selaras dengan tema */
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                var(--bg-card) 40%, 
+                var(--bg-body) 100%);
+            
+            /* Membuat background mentok ke ujung layar */
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
         }
+
         .footer-logo {
             font-weight: 900;
             letter-spacing: 6px;
@@ -202,21 +216,24 @@
             margin-bottom: 5px;
             text-transform: uppercase;
         }
+
         .footer-divider {
             width: 100px;
             height: 2px;
             background: var(--gradient);
-            margin: 10px auto;
+            margin: 2px auto;
             border-radius: 2px;
         }
+
         .footer-tagline {
             font-size: 0.75rem;
             color: var(--accent-color);
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 1px;
         }
+
         .footer-info {
             font-size: 0.65rem;
             color: var(--text-muted);
@@ -226,13 +243,15 @@
             max-width: 600px;
             margin: 0 auto;
         }
+
         .copyright-text {
             margin-top: 2px;
             font-size: 0.6rem;
-            color: var(--gradient);
+            color: var(--accent-color);
             opacity: 0.6;
             letter-spacing: 1px;
         }
+
 
     </style>
 </head>
@@ -336,22 +355,20 @@
                 <button class="btn-hapus-final" onclick="clearLogs()">HAPUS SEMUA LOG SISTEM</button>
             </div>
         </div>
-
         <footer class="footer-app">
             <div class="footer-logo">DRIVER HELPER DELTA 8</div>
             <div class="footer-tagline">Excellence in Logistics</div>
             <div class="footer-divider"></div>
             
-            <div class="footer-info">
-                Sistem Manajemen Uang KAS Driver Helper</div>
-                 <div class="copyright-text">
-                &copy; 2026 ALL MAMAGEMENT MEMBERS.
+            <div class="footer-info">Sistem Manajemen Uang KAS Driver Helper</div>
+            <div class="copyright-text">
+                &copy; 2026 ALL MANAGEMENT MEMBERS.
             </div>
-                <strong style="font-size: 13px;color: var(--accent-color); letter-spacing: 2px; display: block; margin-top: 5px;">---<{SUPPORTED BY : MANCUNG_168}>---
+            <div style="margin-top: 10px;">
+                <strong style="font-size: 13px; color: var(--accent-color); letter-spacing: 2px;">
+                    ---<{SUPPORTED BY : MANCUNG_168}>---
                 </strong>
             </div>
-
-           
         </footer>
 
     </div>
