@@ -390,7 +390,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const CLOUD_URL = 'https://script.google.com/macros/s/AKfycbxGqn9fddYzeOONKISBo6uc6TT_osSkJ10J-20pLtSSQIAUXg6DfwY8f6yYUa6opPYH/exec';
+        const CLOUD_URL = 'https://script.google.com/macros/s/AKfycbxVBjm8v7xqLO8PDv_exhXIrGnKfYFPuaqDiLc43VthAGxBPEuR4JwEC3BhH6EqoNuM/exec';
         const APP_PIN = "0000";
         let DB_DRIVER = [], DB_HELPER = [], DB_TRANSAKSI = [], DB_LOGS = [];
         let pendingAction = null, pendingParams = null, currentContext = { type: '', id: null, idx: null };
@@ -573,6 +573,12 @@
 
             DB_TRANSAKSI.forEach((x, idx) => {
                 let d = new Date(x.d);
+                const sumber = (x.p || "").toUpperCase();
+                const ket = (x.k || "").toUpperCase();
+                
+                // Jangan tampilkan transaksi SALDO AWAL di tabel mutasi bulanan karena sudah masuk ke Saldo Awal (Box Atas)
+                if (sumber.includes("SALDO AWAL") || ket.includes("SALDO AWAL")) return;
+
                 if (d.getFullYear() === y && (d.getMonth() + 1) === m) {
                     if (x.tp === 'Pemasukan') cLainnya += x.v; else cOut += x.v;
                     hi.innerHTML += `<tr><td class="text-center">${x.d.split('-').reverse().join('/')}</td><td class="fw-bold ${x.tp == 'Pemasukan' ? 'text-success' : 'text-danger'} text-center">${x.tp.toUpperCase()}</td><td>${x.p}</td><td>${x.k || '-'}</td><td class="fw-bold text-end">Rp ${x.v.toLocaleString()}</td><td class="col-aksi-center"><div class="btn-aksi-trigger" data-type="trans" data-idx="${idx}">⋮</div></td></tr>`;
@@ -590,8 +596,30 @@
 
         function calculatePastBalance(m, y) {
             let tIn = 0, tOut = 0;
+            
+            // 1. Logika Saldo Awal Statis dari Transaksi (Kunci: "SALDO AWAL")
+            DB_TRANSAKSI.forEach(x => {
+                const sumber = (x.p || "").toUpperCase();
+                const ket = (x.k || "").toUpperCase();
+                if (sumber.includes("SALDO AWAL") || ket.includes("SALDO AWAL")) {
+                    if (x.tp === 'Pemasukan') tIn += x.v; else tOut += x.v;
+                }
+            });
+
+            // 2. Iuran Anggota periode lampau
             [...DB_DRIVER, ...DB_HELPER].forEach(p => { if (p.status) Object.keys(p.status).forEach(sy => { Object.keys(p.status[sy]).forEach(sm => { if (parseInt(sy) < y || (parseInt(sy) == y && parseInt(sm) < m)) if (p.status[sy][sm]) tIn += 25000; }); }); });
-            DB_TRANSAKSI.forEach(x => { let d = new Date(x.d); if (d.getFullYear() < y || (d.getFullYear() == y && (d.getMonth() + 1) < m)) if (x.tp === 'Pemasukan') tIn += x.v; else tOut += x.v; });
+            
+            // 3. Transaksi Biasa periode lampau (BUKAN SALDO AWAL)
+            DB_TRANSAKSI.forEach(x => { 
+                let d = new Date(x.d); 
+                const sumber = (x.p || "").toUpperCase();
+                const ket = (x.k || "").toUpperCase();
+                if (!sumber.includes("SALDO AWAL") && !ket.includes("SALDO AWAL")) {
+                    if (d.getFullYear() < y || (d.getFullYear() == y && (d.getMonth() + 1) < m)) {
+                        if (x.tp === 'Pemasukan') tIn += x.v; else tOut += x.v;
+                    }
+                }
+            });
             return tIn - tOut;
         }
 
@@ -715,10 +743,10 @@
             if (finalY < 250) {
                 doc.setTextColor(pureBlack[0], pureBlack[1], pureBlack[2]);
                 doc.setFont("times", "normal"); doc.setFontSize(12);
-                doc.text("Diterbitkan Oleh,", rightPos - 25, finalY + 40, { align: "center" });
+                doc.text("Diterbitkan Oleh,", rightPos - 25, finalY + 20, { align: "center" });
                 
                 const sX = rightPos - 45; 
-                const sY = finalY + 52;
+                const sY = finalY + 30;
                 doc.setDrawColor(stampRed[0], stampRed[1], stampRed[2]);
                 doc.setLineWidth(0.8);
                 doc.circle(sX, sY, 13, 'S'); 
@@ -737,19 +765,18 @@
 
                 doc.setFont("courier", "bolditalic"); doc.setFontSize(14);
                 doc.setTextColor(20, 40, 100); 
-                doc.text(editorName, rightPos - 25, finalY + 53, { align: "center" });
+                doc.text(editorName, rightPos - 25, finalY + 30, { align: "center" });
 
                 doc.setTextColor(pureBlack[0], pureBlack[1], pureBlack[2]);
                 doc.setFont("times", "bold"); doc.setFontSize(11);
-                doc.text("(       Pengurus Uang KAS       )", rightPos, finalY + 65, { align: "right" }); 
-                doc.text("__________________________", rightPos, finalY + 66, { align: "right" }); 
+                doc.text("(       Pengurus Uang KAS       )", rightPos, finalY + 40, { align: "right" }); 
+                doc.text("__________________________", rightPos, finalY + 41, { align: "right" }); 
             }
 
             const pageCount = doc.internal.getNumberOfPages();
             for(let i = 1; i <= pageCount; i++) {
                 doc.setPage(i);
                 doc.setFontSize(9); doc.setTextColor(100);
-                // Menukar urutan: Waktu dicetak di baris atas, Supported di baris bawah
                 doc.text(`Official Document Driver Helper Delta 8 | Dicetak: ${new Date().toLocaleString()} | Halaman ${i} dari ${pageCount}`, 105, 285, { align: "center" } );
                 doc.setFontSize(8); doc.setTextColor(120);
                 doc.text(`--<{SUPPORTED BY : MANCUNG_168}>--`, 105, 290, { align: "center" } );
