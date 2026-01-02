@@ -47,9 +47,10 @@
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
-            padding: 15px;
+            padding: 0px;
             overflow-x: hidden;
             transition: 0.3s;
+            font-size: 12px !important;
         }
 
         .judul-utama {
@@ -58,7 +59,7 @@
             -webkit-text-fill-color: transparent;
             font-weight: 900;
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             letter-spacing: 0px;
             text-transform: uppercase;
             margin-bottom: 5px;
@@ -89,6 +90,7 @@
             background-color: var(--bg-card) !important;
             color: var(--text-main);
             border-radius: 6px;
+            font-size: 11px !important;
         }
 
         .table thead th {
@@ -97,7 +99,7 @@
             z-index: 25;
             background: var(--gradient) !important;
             color: #000000 !important;
-            font-size: 0.85rem !important;
+            font-size: 10px !important;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -105,99 +107,100 @@
             vertical-align: middle;
             text-align: center !important;
             border-radius: 6px !important;
-            height: 46px !important;
+            height: 40px !important;
             padding-top: 5px !important;
         }
 
-        .no-col { width: 45px !important; height: 45px; position: sticky !important; left: 0; z-index: 10; background-color: var(--bg-card) !important; color: var(--text-main) !important; font-size: 0.75rem !important; font-weight: 800; text-align: center; vertical-align: middle !important; border-radius: 7px; }
-        .name-col { width: 180px !important; position: sticky !important; left: 45px; z-index: 9; background-color: var(--accent-color) !important; color: var(--text-main) !important; font-size: 0.75rem !important; font-weight: 700 !important; text-transform: uppercase; vertical-align: middle !important; padding-left: 12px !important; border-right: 2px solid var(--accent-color) !important; border-left: 2px solid var(--accent-color) !important; border-radius: 7px; }
+        .no-col { width: 45px !important; height: 40px; position: sticky !important; left: 0; z-index: 10; background-color: var(--bg-card) !important; color: var(--text-main) !important; font-size: 11px !important; font-weight: 800; text-align: center; vertical-align: middle !important; border-radius: 7px; }
+        .name-col { width: 180px !important; position: sticky !important; left: 45px; z-index: 9; background-color: var(--accent-color) !important; color: var(--text-main) !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase; vertical-align: middle !important; padding-left: 12px !important; border-right: 2px solid var(--accent-color) !important; border-left: 2px solid var(--accent-color) !important; border-radius: 7px; }
 
-        .status-toggle { background: var(--accent-color); width: 60px !important; border-radius: 7px; text-align: center; vertical-align: middle; cursor: pointer; }
-        .text-center-force { font-size: 15px; color: var(--text-main) !important; text-align: center; border-radius: 6px; vertical-align: middle !important; width: 60px !important; }
+        .status-toggle { background: var(--accent-color); width: 60px !important; border-radius: 7px; text-align: center; vertical-align: middle; cursor: pointer; font-size: 11px !important; }
+        .text-center-force { font-size: 12px; color: var(--text-main) !important; text-align: center; border-radius: 6px; vertical-align: middle !important; width: 60px !important; }
 
         thead th.no-col { z-index: 40 !important; top: 0; left: 0; background: var(--gradient) !important; }
         thead th.name-col { z-index: 39 !important; top: 0; left: 45px; background: var(--gradient) !important; }
 
-        #table-transaksi, #log-list-table { 
-            border-collapse: separate !important; border-spacing: 2px 2px; table-layout: fixed; width: 100%; min-width: 800px; border: none; 
+        /* FIX: PANEL KONTROL RATA KIRI KANAN SESUAI LEBAR TABEL */
+        .panel-kontrol-utama { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            width: 100%; 
+            padding: 0 2px;
+            margin: 25px 0 10px 0;
+            gap: 10px;
+        }
+        .select-group-mini { 
+            display: flex; 
+            flex: 1;
+            max-width: 45%;
+            gap: 5px; 
+            background: transparent; 
+            padding: 0 1px; 
+            border-radius: 8px; 
+            border: 1px solid var(--accent-color); 
+            height: 38px; 
+            align-items: center;
+            justify-content: space-between;
+        }
+        .custom-select-mini { background: transparent; color: var(--accent-color); border: none; font-size: 9px; font-weight: 900; cursor: pointer; outline: none; text-transform: uppercase; width: 45%; }
+        
+        .button-group-right { display: flex; flex: 1; justify-content: flex-end; gap: 5px; }
+        .btn-luxe { 
+            color: var(--accent-color); 
+            background: transparent; 
+            font-size: 10px !important; 
+            font-weight: 900 !important; 
+            height: 38px; 
+            padding: 0 5px !important; 
+            border-radius: 8px !important; 
+            border: 1px solid var(--accent-color); 
+            letter-spacing: 0.1px; 
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
         }
         
-        #table-transaksi thead th, #log-list-table thead th { 
-            height: 40px !important; text-align: center !important; font-size: 0.8rem !important; padding-top: 5px !important;
-            position: sticky; top: 0; z-index: 10;
-        }
-
+        .btn-unduh-final { width: 100%; background: var(--gradient); color: #000; font-weight: 900; border: none; padding: 12px; border-radius: 8px; text-transform: uppercase; font-size: 12px; margin-bottom: 10px; }
+        .btn-hapus-final { width: 100%; background: transparent; color: #ff4d4d; border: 1px solid #ff4d4d; font-weight: bold; padding: 10px; border-radius: 8px; font-size: 11px; }
+        .label-armada { font-weight: 900; color: var(--accent-color); margin: 15px 0 5px 0; display: block; width: 100%; font-size: 12px; }
+        
+        #table-transaksi, #log-list-table { border-collapse: separate !important; border-spacing: 2px 2px; table-layout: fixed; width: 100%; min-width: 800px; border: none; }
+        #table-transaksi thead th, #log-list-table thead th { height: 35px !important; text-align: center !important; font-size: 10px !important; padding-top: 5px !important; position: sticky; top: 0; z-index: 10; }
         .col-tgl { width: 85px !important; }
         .col-tip { width: 120px !important; }
         .col-sum { width: 200px !important; }
         .col-ket { width: 210px !important; }
         .col-nom { width: 120px !important; }
         .col-aks { width: 45px !important; }
-
-        #table-transaksi tbody td, #log-list-table tbody td {
-            height: 20px !important; 
-            line-height: 1.1 !important;
-            border-radius: 4px;
-            border-bottom: 1px solid var(--accent-color) !important;
-            padding: 2px 8px !important;
-            font-size: 0.75rem !important;
-            vertical-align: middle !important;
-            background-color: var(--bg-card) !important;
-            white-space: nowrap !important;
-            color: var(--text-main) !important;
-        }
-
-        .transaksi-scroll-area {
-            max-height: 400px; 
-            overflow-y: auto;
-            border-radius: 12px;
-            background: var(--accent-color);
-            padding: 1px;
-        }
-
-        ::placeholder { color: var(--text-main) !important; opacity: 1 !important; }
+        #table-transaksi tbody td, #log-list-table tbody td { height: 20px !important; line-height: 1.1 !important; border-radius: 4px; border-bottom: 1px solid var(--accent-color) !important; padding: 2px 8px !important; font-size: 11px !important; vertical-align: middle !important; background-color: var(--bg-card) !important; white-space: nowrap !important; color: var(--text-main) !important; }
+        .transaksi-scroll-area { max-height: 400px; overflow-y: auto; border-radius: 12px; background: var(--accent-color); padding: 1px; }
+          ::placeholder { color: var(--text-main) !important; opacity: 1 !important; }
         .form-control::placeholder { color: var(--text-main) !important; }
         .form-control { background-color: var(--input-bg, #1a1a1a) !important; color: var(--text-main) !important; border: 1px solid var(--accent-color) !important; }
         .modal-content { background: var(--bg-card); border: 2px solid var(--accent-color); color: var(--text-main); border-radius: 15px; }
-
-        #log-list-table { table-layout: auto !important; }
-        
+        .form-control { background-color: var(--input-bg, #1a1a1a) !important; color: var(--text-main) !important; border: 1px solid var(--accent-color) !important; font-size: 12px !important;}
+        .modal-content { background: var(--bg-card); border: 2px solid var(--accent-color); color: var(--text-main); border-radius: 15px; }
         .col-aksi-center { text-align: center !important; vertical-align: middle !important; padding: 0 !important; width: 30px; border-radius: 6px !important; }
-        .btn-aksi-trigger { cursor: pointer; color: var(--text-main); font-weight: bold; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; background: transparent !important; }
-        
-        .fleet-header-wrapper { margin-top: 30px; margin-bottom: 10px; }
-        .panel-kanan { display: flex; align-items: center; width: 100%; justify-content: space-between; gap: 10px; }
-        .select-group-mini { display: flex; gap: 2px; background: transparent; padding: 2px 8px; border-radius: 8px; border: 1px solid var(--accent-color); height: 36px; align-items: center; }
-        .custom-select-mini { background: transparent; color: var(--accent-color); border: none; font-size: 0.75rem; font-weight: 900; cursor: pointer; outline: none; text-transform: uppercase; }
-        .btn-luxe { color: var(--accent-color); background: transparent; font-size: 0.7rem !important; font-weight: 900 !important; height: 36px; padding: 0 10px !important; border-radius: 8px !important; border: 1px solid var(--accent-color); letter-spacing: 0.5px; white-space: nowrap; }
-        .btn-unduh-final { width: 100%; background: var(--gradient); color: #000; font-weight: 900; border: none; padding: 12px; border-radius: 8px; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 8px; }
-        .btn-hapus-final { width: 100%; background: transparent; color: #ff4d4d; border: 1px solid #ff4d4d; font-weight: bold; padding: 8px; border-radius: 8px; font-size: 0.75rem; }
-        .label-armada { font-weight: 900; color: var(--accent-color); margin: 15px 0 5px 0; display: block; width: 100%; }
-        .card-saldo { background: var(--card-inner); border: 1px solid var(--accent-color); border-radius: 12px; padding: 12px 8px; text-align: center; min-height: 80px; display: flex; flex-direction: column; justify-content: center; }
-        .card-saldo .label { font-size: 0.6rem; font-weight: 900; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
-        .card-saldo .value { font-size: 0.85rem; font-weight: 900; color: var(--text-main); }
-        .theme-dot { width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(128, 128, 128, 0.3); }
+        .btn-aksi-trigger { cursor: pointer; color: var(--text-main); font-weight: bold; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; background: transparent !important; }
+        .card-saldo { background: var(--card-inner); border: 1px solid var(--accent-color); border-radius: 12px; padding: 10px 6px; text-align: center; min-height: 70px; display: flex; flex-direction: column; justify-content: center; }
+        .card-saldo .label { font-size: 9px; font-weight: 900; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+        .card-saldo .value { font-size: 12px; font-weight: 900; color: var(--text-main); }
+        .theme-dot { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(128, 128, 128, 0.3); }
         .theme-dot.active { border: 2px solid var(--text-main); transform: scale(1.1); box-shadow: 0 0 10px var(--accent-color); }
-        .luxe-dropdown { width: 100%; background: var(--bg-card); border: 1px solid var(--accent-color); color: var(--accent-color); padding: 12px 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: bold; margin-top: 15px; }
+        .luxe-dropdown { width: 100%; background: var(--bg-card); border: 1px solid var(--accent-color); color: var(--accent-color); padding: 12px 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: bold; margin-top: 15px; font-size: 12px; }
         .luxe-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: var(--bg-card); border-radius: 0 0 12px 12px; margin-top: -10px; }
-        .luxe-content.show { max-height: 800px; border: 1px solid var(--accent-color); border-top: none; padding: 12px 1px 1px 1px; }
-        .banner-bar { background: var(--gradient); color: #000; padding: 10px; border-radius: 8px; font-weight: 900; text-align: center; margin: 30px 0 15px 0; font-size: 0.85rem; letter-spacing: 2px; }
-        
+        .luxe-content.show { max-height: 800px; border: 1px solid var(--accent-color); border-top: none; padding: 15px 10px 10px 10px; }
+        .banner-bar { background: var(--gradient); color: #000; padding: 8px; border-radius: 8px; font-weight: 900; text-align: center; margin: 35px 0 15px 0; font-size: 12px; letter-spacing: 2px; }
         #actionMenu { display: none; position: absolute; z-index: 99999; background: var(--bg-card); border: 1px solid var(--accent-color); border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); min-width: 110px; overflow: hidden; }
-        .menu-item { padding: 10px 15px; cursor: pointer; font-size: 0.85rem; border-bottom: 1px solid var(--border-color); color: var(--text-main); }
-                .footer-app {
-            margin-top: 40px;
-            padding: 40px 0;
+        .menu-item { padding: 8px 15px; cursor: pointer; font-size: 12px; border-bottom: 1px solid var(--border-color); color: var(--text-main); }
+        
+        .footer-app {
+            margin-top: 50px;
+            padding: 30px 0;
             text-align: center;
             border-top: 1px solid var(--border-color);
-            
-            /* Gradasi dari atas ke bawah selaras dengan tema */
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                var(--bg-card) 40%, 
-                var(--bg-body) 100%);
-            
-            /* Membuat background mentok ke ujung layar */
+            background: linear-gradient(to bottom, transparent 0%, var(--bg-card) 40%, var(--bg-body) 100%);
             width: 100vw;
             position: relative;
             left: 50%;
@@ -206,53 +209,11 @@
             margin-right: -50vw;
         }
 
-        .footer-logo {
-            font-weight: 900;
-            letter-spacing: 6px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .footer-divider {
-            width: 100px;
-            height: 2px;
-            background: var(--gradient);
-            margin: 2px auto;
-            border-radius: 2px;
-        }
-
-        .footer-tagline {
-            font-size: 0.75rem;
-            color: var(--accent-color);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 1px;
-        }
-
-        .footer-info {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 2;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .copyright-text {
-            margin-top: 2px;
-            font-size: 0.6rem;
-            color: var(--accent-color);
-            opacity: 0.6;
-            letter-spacing: 1px;
-        }
-
-
+        .footer-logo { font-weight: 900; letter-spacing: 5px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1rem; margin-bottom: 5px; text-transform: uppercase; }
+        .footer-divider { width: 80px; height: 1.5px; background: var(--gradient); margin: 2px auto; border-radius: 2px; }
+        .footer-tagline { font-size: 0.7rem; color: var(--accent-color); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 1px; }
+        .footer-info { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; line-height: 1.8; max-width: 600px; margin: 0 auto; }
+        .copyright-text { margin-top: 2px; font-size: 9px; color: var(--accent-color); opacity: 0.6; letter-spacing: 1px; }
     </style>
 </head>
 
@@ -260,7 +221,7 @@
     <div class="container-fluid" id="app-content">
         <div id="header-section" class="text-center pt-4 pb-1">
             <h3 class="judul-utama">DATA UANG KAS DRIVER HELPER DELTA 8</h3>
-            <p id="sync-status" class="small fw-bold" style="color: var(--text-muted); letter-spacing: 3px; margin: 0;">☁️ MENGHUBUNGKAN...</p>
+            <p id="sync-status" class="small fw-bold" style="color: var(--text-muted); letter-spacing: 3px; margin: 0; font-size: 10px;">☁️ MENGHUBUNGKAN...</p>
             <div class="theme-container d-flex justify-content-center gap-3 mt-3">
                 <div id="dot-luxury" class="theme-dot active" style="background: #d4af37;" onclick="setTheme('luxury')"></div>
                 <div id="dot-emerald" class="theme-dot" style="background: #10b981;" onclick="setTheme('emerald')"></div>
@@ -270,21 +231,19 @@
         </div>
 
         <div id="fleet-area">
-            <div class="fleet-header-wrapper">
-                <div class="panel-kanan">
-                    <div class="select-group-mini">
-                        <select id="selMonth" class="custom-select-mini" onchange="render()"></select>
-                        <span style="color: var(--border-color); opacity: 0.5;">|</span>
-                        <select id="selYear" class="custom-select-mini" onchange="render()"></select>
-                    </div>
-                    <div class="d-flex gap-2">
-                        <button class="btn-luxe" onclick="askAuth('catat')">+ TRANSAKSI</button>
-                        <button class="btn-luxe" onclick="askAuth('tambah')">+ ANGGOTA</button>
-                    </div>
+            <div class="panel-kontrol-utama">
+                <div class="select-group-mini">
+                    <select id="selMonth" class="custom-select-mini" onchange="render()"></select>
+                    <span style="color: var(--accent-color); opacity: 0.5;">|</span>
+                    <select id="selYear" class="custom-select-mini" onchange="render()"></select>
                 </div>
-                <h6 class="label-armada">| DATA DRIVER</h6>
+                <div class="button-group-right">
+                    <button class="btn-luxe" onclick="askAuth('catat')">+ TRANSAKSI</button>
+                    <button class="btn-luxe" onclick="askAuth('tambah')">+ ANGGOTA</button>
+                </div>
             </div>
 
+            <h6 class="label-armada">| DATA DRIVER</h6>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -355,37 +314,29 @@
                 <button class="btn-hapus-final" onclick="clearLogs()">HAPUS SEMUA LOG SISTEM</button>
             </div>
         </div>
+
         <footer class="footer-app">
             <div class="footer-logo">DRIVER HELPER DELTA 8</div>
             <div class="footer-tagline">Excellence in Logistics</div>
             <div class="footer-divider"></div>
-            
             <div class="footer-info">Sistem Manajemen Uang KAS Driver Helper</div>
-            <div class="copyright-text">
-                &copy; 2026 ALL MANAGEMENT MEMBERS.
-            </div>
+            <div class="copyright-text">&copy; 2026 ALL MANAGEMENT MEMBERS.</div>
             <div style="margin-top: 10px;">
                 <strong style="font-size: 8px; color: var(--accent-color); letter-spacing: 2px;">
                     ---<{SUPPORTED BY : MANCUNG_168}>---
                 </strong>
             </div>
         </footer>
-
     </div>
 
     <div id="actionMenu">
         <div class="menu-item p-2 px-3" onclick="doEdit()">✏️ Edit</div>
         <div class="menu-item p-2 px-3 text-danger" onclick="doDelete()">🗑️ Hapus</div>
     </div>
-
     <div class="modal fade" id="modalVerifyAuth" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body p-4 text-center"><h6 class="fw-bold mb-3">VERIFIKASI OTORITAS</h6><input type="text" id="inputEditorName" class="form-control mb-2 text-center" placeholder="Nama Editor"><input type="password" id="inputPIN" class="form-control mb-3 text-center" maxlength="4" placeholder="PIN" inputmode="numeric" oninput="checkAuth()"></div></div></div></div>
-    
     <div class="modal fade" id="modalCatat" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><h6 class="fw-bold mb-3">CATAT TRANSAKSI</h6><form id="fTrans"><input type="hidden" id="editTransIdx"><select name="tp" id="trans_type" class="form-select mb-2"><option value="Pemasukan">Pemasukan</option><option value="Pengeluaran" selected>Pengeluaran</option></select><input type="date" name="d" id="trans_date" class="form-control mb-2" required><input type="text" name="p" id="trans_source" class="form-control mb-2" placeholder="Sumber/Penerima"><input type="text" name="k" id="trans_ket" class="form-control mb-2" placeholder="Keterangan"><input type="number" name="v" id="trans_val" class="form-control mb-3" placeholder="Nominal" required><button type="submit" class="btn btn-warning w-100 fw-bold">SIMPAN</button></form></div></div></div></div>
-
     <div class="modal fade" id="modalTambah" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-body"><h6 class="fw-bold mb-3">TAMBAH/EDIT ANGGOTA</h6><form id="fAdd"><input type="hidden" id="editMemberId"><textarea id="n" class="form-control mb-2" style="height:100px" placeholder="Nama Anggota (Pisahkan enter)"></textarea><select id="k" class="form-select mb-3"><option value="Driver">Driver</option><option value="Helper">Helper</option></select><button type="submit" class="btn btn-warning w-100 fw-bold">SIMPAN</button></form></div></div></div></div>
-
     <div class="modal fade" id="modalKonfirmasiHapus" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content"><div class="modal-body p-4 text-center"><div class="mb-3" style="font-size: 2rem;">⚠️</div><h6 class="fw-bold mb-4">Hapus data ini?</h6><div class="d-flex gap-2"><button type="button" class="btn btn-dark w-100" data-bs-dismiss="modal">BATAL</button><button type="button" class="btn btn-danger w-100" onclick="eksekusiHapus()">HAPUS</button></div></div></div></div></div>
-
     <div class="modal fade" id="modalKonfirmasiLog" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content"><div class="modal-body p-4 text-center"><div class="mb-3" style="font-size: 2rem;">🗑️</div><h6 class="fw-bold mb-4">BERSIHKAN LOG?</h6><div class="d-flex gap-2"><button type="button" class="btn btn-dark w-100" data-bs-dismiss="modal">BATAL</button><button type="button" class="btn btn-danger w-100" onclick="eksekusiHapusLog()">HAPUS</button></div></div></div></div></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -480,62 +431,31 @@
                 let p = (pendingParams.kat === 'Driver' ? DB_DRIVER : DB_HELPER).find(x => x.id == pendingParams.id);
                 if (!p.status[pendingParams.y]) p.status[pendingParams.y] = {};
                 p.status[pendingParams.y][pendingParams.m] = !p.status[pendingParams.y][pendingParams.m];
-                
                 const isLunas = p.status[pendingParams.y][pendingParams.m];
-                const statusIcon = isLunas ? "✅ - LUNAS" : "❌ - BATAL";
-                const formatBulan = pendingParams.m.toString().padStart(2, '0');
-                
-                addLog("Iuran", `${pendingParams.kat.toUpperCase()} - ${p.nama} - ${formatBulan}/${pendingParams.y} - [${statusIcon}]`);
+                addLog("Iuran", `${pendingParams.kat.toUpperCase()} - ${p.nama} - ${pendingParams.m}/${pendingParams.y} - [${isLunas ? "LUNAS" : "BATAL"}]`);
                 syncAll();
             }
         }
 
         async function loadFromCloud() {
-    document.getElementById('sync-status').innerText = "⏳ MEMUAT DATA...";
-    try {
-        const res = await fetch(CLOUD_URL + "?action=read"); 
-        const data = await res.json();
-        
-        // Memastikan data yang diterima tidak kosong
-        DB_DRIVER = data.driver || []; 
-        DB_HELPER = data.helper || []; 
-        DB_TRANSAKSI = data.transaksi || []; 
-        DB_LOGS = data.logs || [];
-        
-        render(); 
-        document.getElementById('sync-status').innerText = "☁️ TERHUBUNG";
-    } catch (e) { 
-        document.getElementById('sync-status').innerText = "☁️ TERPUTUS"; 
-        render(); 
-    }
-}
-
+            document.getElementById('sync-status').innerText = "⏳ MEMUAT DATA...";
+            try {
+                const res = await fetch(CLOUD_URL + "?action=read"); 
+                const data = await res.json();
+                DB_DRIVER = data.driver || []; DB_HELPER = data.helper || []; DB_TRANSAKSI = data.transaksi || []; DB_LOGS = data.logs || [];
+                render(); 
+                document.getElementById('sync-status').innerText = "☁️ TERHUBUNG";
+            } catch (e) { document.getElementById('sync-status').innerText = "☁️ TERPUTUS"; render(); }
+        }
 
         async function syncAll() {
-    render(); 
-    // Memberikan indikasi visual di HP bahwa data sedang dikirim
-    document.getElementById('sync-status').innerText = "⏳ MENYIMPAN...";
-    
-    try {
-        await fetch(CLOUD_URL, { 
-            method: 'POST', 
-            mode: 'no-cors', 
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                driver: DB_DRIVER, 
-                helper: DB_HELPER, 
-                transaksi: DB_TRANSAKSI, 
-                logs: DB_LOGS 
-            }) 
-        });
-        // Jika berhasil, status kembali ke TERHUBUNG
-        document.getElementById('sync-status').innerText = "☁️ TERHUBUNG";
-    } catch (e) {
-        // Jika gagal (misal: sinyal buruk), status akan memberitahu Anda
-        document.getElementById('sync-status').innerText = "⚠️ GAGAL SINKRON";
-        console.error("Error Sync:", e);
-    }
-}
+            render(); 
+            document.getElementById('sync-status').innerText = "⏳ MENYIMPAN...";
+            try {
+                await fetch(CLOUD_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ driver: DB_DRIVER, helper: DB_HELPER, transaksi: DB_TRANSAKSI, logs: DB_LOGS }) });
+                document.getElementById('sync-status').innerText = "☁️ TERHUBUNG";
+            } catch (e) { document.getElementById('sync-status').innerText = "⚠️ GAGAL SINKRON"; }
+        }
 
         function addLog(aksi, ket) {
             const d = new Date(), pad = (n) => n.toString().padStart(2, '0');
@@ -546,18 +466,14 @@
         function clearLogs() { new bootstrap.Modal('#modalKonfirmasiLog').show(); }
         function eksekusiHapusLog() { bootstrap.Modal.getInstance('#modalKonfirmasiLog').hide(); addLog("SYSTEM", "BERSIHKAN SEMUA LOG"); DB_LOGS = []; syncAll(); }
 
-                function render() {
+        function render() {
             const gd = document.getElementById('grid-driver'), gh = document.getElementById('grid-helper'), hi = document.getElementById('hist'), lg = document.getElementById('log-list');
             gd.innerHTML = gh.innerHTML = hi.innerHTML = lg.innerHTML = '';
             const m = parseInt(document.getElementById('selMonth').value), y = parseInt(document.getElementById('selYear').value);
             let sAwal = calculatePastBalance(m, y), cIuran = 0, cLainnya = 0, cOut = 0;
 
-            // Memasukkan logika pengurutan A-Z sebelum data digambar
-            const sortedDrivers = [...DB_DRIVER].sort((a, b) => a.nama.localeCompare(b.nama));
-            const sortedHelpers = [...DB_HELPER].sort((a, b) => a.nama.localeCompare(b.nama));
-
             const draw = (list, target, kat) => {
-                list.forEach((p, idx) => {
+                list.sort((a,b) => a.nama.localeCompare(b.nama)).forEach((p, idx) => {
                     let count = 0, cells = ''; if (!p.status) p.status = {};
                     for (let i = 1; i <= 12; i++) {
                         let s = p.status[y]?.[i] || false; if (s) { count++; if (i === m) cIuran += 25000; }
@@ -567,18 +483,10 @@
                 });
             };
 
-            // Menggunakan data yang sudah terurut
-            draw(sortedDrivers, gd, 'Driver'); 
-            draw(sortedHelpers, gh, 'Helper');
+            draw(DB_DRIVER, gd, 'Driver'); draw(DB_HELPER, gh, 'Helper');
 
             DB_TRANSAKSI.forEach((x, idx) => {
                 let d = new Date(x.d);
-                const sumber = (x.p || "").toUpperCase();
-                const ket = (x.k || "").toUpperCase();
-                
-                // Jangan tampilkan transaksi SALDO AWAL di tabel mutasi bulanan karena sudah masuk ke Saldo Awal (Box Atas)
-                if (sumber.includes("SALDO AWAL") || ket.includes("SALDO AWAL")) return;
-
                 if (d.getFullYear() === y && (d.getMonth() + 1) === m) {
                     if (x.tp === 'Pemasukan') cLainnya += x.v; else cOut += x.v;
                     hi.innerHTML += `<tr><td class="text-center">${x.d.split('-').reverse().join('/')}</td><td class="fw-bold ${x.tp == 'Pemasukan' ? 'text-success' : 'text-danger'} text-center">${x.tp.toUpperCase()}</td><td>${x.p}</td><td>${x.k || '-'}</td><td class="fw-bold text-end">Rp ${x.v.toLocaleString()}</td><td class="col-aksi-center"><div class="btn-aksi-trigger" data-type="trans" data-idx="${idx}">⋮</div></td></tr>`;
@@ -596,48 +504,19 @@
 
         function calculatePastBalance(m, y) {
             let tIn = 0, tOut = 0;
-            
-            // 1. Logika Saldo Awal Statis dari Transaksi (Kunci: "SALDO AWAL")
-            DB_TRANSAKSI.forEach(x => {
-                const sumber = (x.p || "").toUpperCase();
-                const ket = (x.k || "").toUpperCase();
-                if (sumber.includes("SALDO AWAL") || ket.includes("SALDO AWAL")) {
-                    if (x.tp === 'Pemasukan') tIn += x.v; else tOut += x.v;
-                }
-            });
-
-            // 2. Iuran Anggota periode lampau
             [...DB_DRIVER, ...DB_HELPER].forEach(p => { if (p.status) Object.keys(p.status).forEach(sy => { Object.keys(p.status[sy]).forEach(sm => { if (parseInt(sy) < y || (parseInt(sy) == y && parseInt(sm) < m)) if (p.status[sy][sm]) tIn += 25000; }); }); });
-            
-            // 3. Transaksi Biasa periode lampau (BUKAN SALDO AWAL)
             DB_TRANSAKSI.forEach(x => { 
-                let d = new Date(x.d); 
-                const sumber = (x.p || "").toUpperCase();
-                const ket = (x.k || "").toUpperCase();
-                if (!sumber.includes("SALDO AWAL") && !ket.includes("SALDO AWAL")) {
-                    if (d.getFullYear() < y || (d.getFullYear() == y && (d.getMonth() + 1) < m)) {
-                        if (x.tp === 'Pemasukan') tIn += x.v; else tOut += x.v;
-                    }
-                }
+                let d = new Date(x.d); if (d.getFullYear() < y || (d.getFullYear() == y && (d.getMonth() + 1) < m)) { if (x.tp === 'Pemasukan') tIn += x.v; else tOut += x.v; }
             });
             return tIn - tOut;
         }
 
         document.getElementById('fAdd').onsubmit = (e) => {
-            e.preventDefault(); const id = document.getElementById('editMemberId').value;
-            const kat = document.getElementById('k').value.toUpperCase(); 
-            const n = document.getElementById('n').value.toUpperCase();
+            e.preventDefault(); const id = document.getElementById('editMemberId').value, kat = document.getElementById('k').value.toUpperCase(), n = document.getElementById('n').value.toUpperCase();
             if (id) { 
-                let p = [...DB_DRIVER, ...DB_HELPER].find(x => x.id == id); 
-                const oldName = p.nama;
-                p.nama = n;
-                addLog("Edit anggota", `${kat} - ${oldName} => ${n}`);
+                let p = [...DB_DRIVER, ...DB_HELPER].find(x => x.id == id); p.nama = n; addLog("Edit anggota", `${kat} - ${n}`);
             } else { 
-                n.split('\n').filter(x => x.trim()).forEach(nm => { 
-                    let p = { id: "ID-"+Date.now()+Math.random().toString(36).substr(2,3), nama: nm.trim(), status: {} }; 
-                    if (kat === 'DRIVER') DB_DRIVER.push(p); else DB_HELPER.push(p); 
-                    addLog("Tambah anggota", `${kat} - ${nm.trim()}`);
-                });
+                n.split('\n').filter(x => x.trim()).forEach(nm => { let p = { id: "ID-"+Date.now()+Math.random().toString(36).substr(2,3), nama: nm.trim(), status: {} }; if (kat === 'DRIVER') DB_DRIVER.push(p); else DB_HELPER.push(p); addLog("Tambah anggota", `${kat} - ${nm.trim()}`); });
             }
             syncAll(); bootstrap.Modal.getInstance('#modalTambah').hide();
         };
@@ -645,19 +524,8 @@
         document.getElementById('fTrans').onsubmit = (e) => {
             e.preventDefault(); const f = new FormData(e.target), idx = document.getElementById('editTransIdx').value;
             const d = { tp: f.get('tp'), d: f.get('d'), p: f.get('p').toUpperCase(), k: f.get('k').toUpperCase(), v: parseInt(f.get('v')) };
-            if (idx !== "") {
-                const old = DB_TRANSAKSI[idx];
-                let changes = [];
-                if(old.tp !== d.tp) changes.push(`TIPE: ${old.tp}=>${d.tp}`);
-                if(old.p !== d.p) changes.push(`SUMBER: ${old.p}=>${d.p}`);
-                if(old.k !== d.k) changes.push(`KET: ${old.k}=>${d.k}`);
-                if(old.v !== d.v) changes.push(`NOM: ${old.v}=>${d.v}`);
-                DB_TRANSAKSI[idx] = d;
-                addLog("Edit transaksi", `TRANSAKSI - ${d.tp.toUpperCase()} - ${d.p} - ${changes.join(', ')}`);
-            } else {
-                DB_TRANSAKSI.push(d);
-                addLog("Tambah transaksi", `TRANSAKSI - ${d.tp.toUpperCase()} - ${d.p} - ${d.k || '-'}`);
-            }
+            if (idx !== "") { DB_TRANSAKSI[idx] = d; addLog("Edit transaksi", `TRANSAKSI - ${d.p}`); }
+            else { DB_TRANSAKSI.push(d); addLog("Tambah transaksi", `TRANSAKSI - ${d.p}`); }
             syncAll(); bootstrap.Modal.getInstance('#modalCatat').hide();
         };
 
@@ -784,7 +652,6 @@
 
             doc.save(`LAPKAS_${editorName}_${mText}.pdf`);
         }
-
         window.onload = () => {
             setTheme(localStorage.getItem('delta8_theme') || 'luxury');
             const sm = document.getElementById('selMonth'), sy = document.getElementById('selYear'), now = new Date();
